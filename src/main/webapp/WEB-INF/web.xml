@@ -1,44 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-         version="6.0">
-
-    <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
-    </welcome-file-list>
-
-    <!-- RegisterServlet Configuration -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+    id="WebApp_ID" version="4.0">
+    
+    <!-- User Management-->
     <servlet>
-        <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.admin.eventphotographyandvideographybookingsystem.RegisterServlet</servlet-class>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.userMgr.servlets.UserServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/RegisterServlet</url-pattern>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/UserServlet</url-pattern>
     </servlet-mapping>
-
-    <!-- LoginServlet Configuration -->
+    
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.admin.eventphotographyandvideographybookingsystem.LoginServlet</servlet-class>
+        <servlet-class>com.userMgr.servlets.LoginServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
-
-    <!-- LogoutServlet Configuration -->
+    
     <servlet>
-        <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>com.admin.eventphotographyandvideographybookingsystem.LogoutServlet</servlet-class>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>com.userMgr.servlets.ProfileServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/LogoutServlet</url-pattern>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/ProfileServlet</url-pattern>
     </servlet-mapping>
-
+    
+    <servlet>
+    	<servlet-name>DeleteServlet</servlet-name>
+    	<servlet-class>com.userMgr.servlets.DeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>DeleteServlet</servlet-name>
+    	<url-pattern>/DeleteServlet</url-pattern>	
+    </servlet-mapping>
+    
+    
+    
+    <!-- Photographer Management-->
+    <servlet>
+        <servlet-name>PhotographerServlet</servlet-name>
+        <servlet-class>com.photographerMgr.servlets.PhotographerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PhotographerServlet</servlet-name>
+        <url-pattern>/PhotographerServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PhotographerLoginServlet</servlet-name>
+        <servlet-class>com.photographerMgr.servlets.PhotographerLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PhotographerLoginServlet</servlet-name>
+        <url-pattern>/PhotographerLoginServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PhotographerProfileServlet</servlet-name>
+        <servlet-class>com.photographerMgr.servlets.PhotographerProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PhotographerProfileServlet</servlet-name>
+        <url-pattern>/PhotographerProfileServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+    	<servlet-name>PhotographerDeleteServlet</servlet-name>
+    	<servlet-class>com.photographerMgr.servlets.PhotographerDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>PhotographerDeleteServlet</servlet-name>
+    	<url-pattern>/PhotographerDeleteServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
 </web-app>
