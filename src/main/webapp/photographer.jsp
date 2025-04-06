@@ -157,14 +157,6 @@
                         </div>
                     </form>
                     
-                    <div class="delete-profile-container">
-                    		
-                        <form>
-                            <button type="button" class="btn btn-animated delete-btn" id="delete-profile-btn" onclick="handleDeleteProfile(event)">
-                            	<i class="fas fa-trash-alt"></i> Delete Profile
-                        	</button>
-                        </form>
-                    </div>
         		
    					 <% } else { %>
         			<h1>No user found in session. Please <a class="refLink" href="photographer-login.jsp" >login</a>.</h1>
@@ -174,23 +166,6 @@
                     <!--End-->
                 </div>
             </div>
-        </div>
-    </div>
-    
-
-    <div class="modal" id="delete-confirmation-modal">
-        <div class="modal-content glass-card">
-            <h3><i class="fas fa-exclamation-triangle"></i> Delete Profile</h3>
-            <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
-            <% if (photographer != null) { %>
-            <div class="modal-actions">
-            	<form action="PhotographerDeleteServlet" method="post">
-            		<input type="hidden" name="originalUsername" value="<%= photographer.getUsername() %>">
-                	<button type="button" class="btn btn-animated cancel-modal-btn" onclick="handleCancelDelete(event)">Cancel</button>
-                	<button type="submit" class="button btn btn-animated confirm-delete-btn">Yes, Delete My Profile</button> <!-- onclick="handleConfirmDelete(event)" -->
-                </form>
-            </div>
-            <% } %>
         </div>
     </div>
     
