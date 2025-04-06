@@ -1,5 +1,6 @@
 package com.photographerMgr.servlets;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ import com.photographerMgr.services.PhotographerDeletionManager;
 
 public class PhotographerDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static final String UPLOAD_DIRECTORY = "C:\\Users\\savir\\Documents\\Java projects\\photoWeb\\src\\main\\webapp\\WEB-INF\\uploads\\photographerSamples\\";
+
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -22,7 +25,7 @@ public class PhotographerDeleteServlet extends HttpServlet {
             return;
         }
         
-        String username = request.getParameter("username");
+        String username = request.getParameter("originalUsername");
         
         // Validate that the username from the form matches the logged-in user
         if (!currentPhotographer.getUsername().equals(username)) {
@@ -34,6 +37,21 @@ public class PhotographerDeleteServlet extends HttpServlet {
         // Delete the user profile
         PhotographerDeletionManager deletionManager = new PhotographerDeletionManager();
         boolean success = deletionManager.deletePhotographerProfile(username);
+        
+        // Delete the user's upload directory
+        String userUploadDirectory = UPLOAD_DIRECTORY + username;
+        
+        try {
+			File directory = new File(userUploadDirectory);
+			if (directory.exists()) {
+				for (File file : directory.listFiles()) {
+					file.delete();
+				}
+				directory.delete();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         
         if (success) {
             // Invalidate session and redirect to a confirmation page

@@ -18,7 +18,12 @@ public class PhotographerDataProcessor {
      * @return User object if authenticated, null otherwise
      */
     public Photographer authenticateUser(String userIdentifier, String password) {
+    	System.out.println("\nauthenticateUser");
         Queue<Photographer> photographerQueue = loadUsersIntoQueue();
+        
+        System.out.println("Queue: " + photographerQueue);
+        System.out.println();
+        
         return bubbleSearchUser(photographerQueue, userIdentifier, password);
     }
     
@@ -27,26 +32,46 @@ public class PhotographerDataProcessor {
      * @return Queue of User objects
      */
     private Queue<Photographer> loadUsersIntoQueue() {
+    	System.out.println("\nloadUsersIntoQueue");
+    	
         Queue<Photographer> queue = new LinkedList<>();
         
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
+            
+            
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
-                if (parts.length >= 9) {
+                System.out.println("Reading file: " + line);
+                
+                System.out.println("Parts: " + parts.length);
+                
+                if (parts.length >= 8) {
                     String username = parts[0];
                     String pwd = parts[1];
                     String email = parts[2];
-                    String fullName = parts[3];
-                    String gender = parts[4];
-                    String address = parts[5];
-                    String phone = parts[6];
-                    String skills = parts[7];
-                    String experience = parts[8];
+                    String gender = parts[3];
+                    String address = parts[4];
+                    String phone = parts[5];
+                    String skills = parts[6];
+                    String fullName = parts[7];
                     
-                    Photographer photographer = new Photographer(username, pwd, email, fullName, gender, address, phone, skills, experience);
+                    System.out.println("\nAdding photographer: " + username);
+                    System.out.println("Password: " + pwd);
+                    System.out.println("Email: " + email);
+                    System.out.println("Full Name: " + fullName);
+                    System.out.println("Gender: "+ gender);
+                    System.out.println("Address: " + address);
+                    System.out.println("Phone: " + phone);
+                    System.out.println("Skills: " + skills+ "\n");
+                    
+                    Photographer photographer = new Photographer(username, pwd, email, gender, address, phone, skills, fullName);
+                    
+                    System.out.println("Photographer object created: " + photographer);
                     queue.add(photographer);
-                }
+                    System.out.println();
+              	   System.out.println("Photographer added: " + photographer);
+                }  
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +88,7 @@ public class PhotographerDataProcessor {
      * @param password user's password
      * @return User object if found and authenticated, null otherwise
      */
-    private Photographer bubbleSearchUser(Queue<Photographer> userQueue, String userIdentifier, String password) {
+   /* private Photographer bubbleSearchUser(Queue<Photographer> userQueue, String userIdentifier, String password) {
         int size = userQueue.size();
         Photographer[] photographers = new Photographer[size];
         
@@ -88,7 +113,35 @@ public class PhotographerDataProcessor {
         }
         
         return null; // User not found or credentials don't match
+    }*/
+    
+    private Photographer bubbleSearchUser(Queue<Photographer> userQueue, String userIdentifier, String password) {
+    	
+    	System.out.println("\nbubbleSearchUser");
+        int size = userQueue.size();
+        Photographer[] photographers = new Photographer[size];
+        
+        
+        System.out.println("Size of queue: " + size);
+        
+        // Convert queue to array and preserve queue contents
+        for (int i = 0; i < size; i++) {
+        	Photographer photographer = userQueue.remove();
+            photographers[i] = photographer;
+            userQueue.add(photographer); // Add back to queue
+        }
+
+        // Simple linear search is more appropriate for finding a user
+        for (Photographer user : photographers) {
+            if (isMatchingUser(user, userIdentifier, password)) {
+            	System.out.println("user: " + user.getUsername() + ", " + user.getEmail());
+                return user;
+            }
+        }
+
+        return null; // User not found or credentials don't match
     }
+
     
     /**
      * Checks if a user matches the provided credentials
@@ -98,8 +151,16 @@ public class PhotographerDataProcessor {
      * @return true if matching, false otherwise
      */
     private boolean isMatchingUser(Photographer user, String userIdentifier, String password) {
-        return (user.getUsername().equals(userIdentifier) || 
+       System.out.println("Checking user: " + user.getUsername() + ", " + user.getEmail());
+		System.out.println("Against: " + userIdentifier + ", " + password);
+		
+		// Check if username or email matches and if password matches
+    	
+    	
+    	return (user.getUsername().equals(userIdentifier) || 
                 user.getEmail().equals(userIdentifier)) && 
                user.getPassword().equals(password);
+        
+       
     }
 }

@@ -20,12 +20,12 @@
         <div class="sidebar glass-card">
             <h2 class="logo"><i class="fas fa-key"></i>Brand</h2>
             <ul class="nav-links">
-                <li><a href="#"><i class="fas fa-building"></i> Portfolio</a></li>
+                <li><a href="#"><i class="fas fa-building"></i> Dashboard</a></li>
                 <li><a href="#"><i style="margin: 0 0 0 3px;" class="fas fa-calendar"></i> Bookings</a></li>
-                <li><a href="#"><i class="fas fa-images"></i> Portfolio</a></li>
+                <li><a href="portfolio.jsp"><i class="fas fa-images"></i> Portfolio</a></li>
                 <li><a href="#"><i style="margin: 0 3px 0 5px;" class="fas fa-dollar-sign"></i> Earnings</a></li>
-                <li class="active"><a href="customer.html"><i class="fas fa-user"></i> My Profile</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li> 
+                <li class="active"><a><i class="fas fa-user"></i> My Profile</a></li>
+                <li><a href="photographer-settings.jsp"><i class="fas fa-cog"></i> Settings</a></li> 
             </ul>
             <div class="sidebar-footer">
                 <a href="logoutPhotographer.jsp" class="logout-btn btn-animated"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -37,7 +37,7 @@
             <header class="glass-card">
             
             	<%if(photographer!=null) { %>
-                	<h1>Welcome, <span id="customer-name">photographer.getFullName()</span>!</h1>
+                	<h1>Welcome, <span id="customer-name"><%=photographer.getFullName()%></span>!</h1>
                 <% } else {%>
                     <h1>Welcome to Dashboard !</h1>
                     <% } %>
@@ -47,7 +47,12 @@
                         <span class="badge">2</span>
                     </div>
                     <div class="user-avatar">
-                        <img src="/assets/default-avatar.png" alt="Profile Picture" id="profile-picture">
+                    	<% if (photographer != null) { %>                  		
+                    		<img src="assets/defaults/<%=photographer.getDefaultProfilePic()%>" alt="Profile Picture" id="profile-picture">
+                        <% } else { %>
+		                    <img src="assets/defaults/unknown.gif" alt="Profile Picture" id="profile-picture">
+               	        <% } %>
+                    
                     </div>
                 </div>
             </header>
@@ -68,8 +73,8 @@
                         <div class="profile-grid">
                         	<div class="profile-field">
                                 <label>Full Name</label>
-                                    <input type="text" id="fullName customer-name-input" minlength="5" maxlength="35" name="fullName" value="<%= photographer.getFullName() %>" required disabled>
                                 <div class="input-box glass-input">
+                                    <input type="text" id="username customer-name-input" minlength="5" maxlength="35" name="fullName" value="<%= photographer.getFullName() %>" required disabled>
                                     <i class="icon fas fa-user"></i>
                                 </div>
                             </div>
@@ -123,7 +128,7 @@
                             <div class="profile-field">
                                 <label>Skills</label>
                                 <div class="input-box glass-input">
-                                    <input type="text" id="customer-preferences-input" value="<%= photographer.getOriginalSkills() %>" required disabled>
+                                    <input type="text" id="customer-preferences-input" name="skills" value="<%= photographer.getOriginalSkills() %>" required disabled>
                                     <i class="icon fas fa-image"></i>
                                 </div>
                             </div>
@@ -162,7 +167,7 @@
                     </div>
         		
    					 <% } else { %>
-        			<h1>No user found in session. Please <a class="refLink" href="customer-login.jsp" >login</a>.</h1>
+        			<h1>No user found in session. Please <a class="refLink" href="photographer-login.jsp" >login</a>.</h1>
     				<% } %>
         			
 
@@ -180,7 +185,7 @@
             <% if (photographer != null) { %>
             <div class="modal-actions">
             	<form action="PhotographerDeleteServlet" method="post">
-            		<input type="hidden" name="usernameDel" value="<%= photographer.getUsername() %>">
+            		<input type="hidden" name="originalUsername" value="<%= photographer.getUsername() %>">
                 	<button type="button" class="btn btn-animated cancel-modal-btn" onclick="handleCancelDelete(event)">Cancel</button>
                 	<button type="submit" class="button btn btn-animated confirm-delete-btn">Yes, Delete My Profile</button> <!-- onclick="handleConfirmDelete(event)" -->
                 </form>

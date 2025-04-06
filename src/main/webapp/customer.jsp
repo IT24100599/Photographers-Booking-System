@@ -182,7 +182,7 @@
             <% if (user != null) { %>
             <div class="modal-actions">
             	<form action="DeleteServlet" method="post">
-            		<input type="hidden" name="usernameDel" value="<%= user.getUsername() %>">
+            		<input type="hidden" name="originalUsername" value="<%= user.getUsername() %>">
                 	<button type="button" class="btn btn-animated cancel-modal-btn" onclick="handleCancelDelete(event)">Cancel</button>
                 	<button type="submit" class="button btn btn-animated confirm-delete-btn">Yes, Delete My Profile</button> <!-- onclick="handleConfirmDelete(event)" -->
                 </form>

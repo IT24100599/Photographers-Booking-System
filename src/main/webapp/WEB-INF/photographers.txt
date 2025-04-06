@@ -1,2 +1,1 @@
-testpg2, 12345678, testpg2@gmail.com, male, testpg@;%1@;%address, 0711111112, photo@;%  video@;% editing, 1@;%2@;%3
-saviru, 12345678, savirukashmira@gmail.com, male, 44/D@;%Yodha Mawatha@;% Siddamulla@;% Piliyandala, 0703191211, photo@;%  video@;% editing, 1@;%2@;%3@;%4
+test1, 123456, test1@gmail.com, Male, 44@;% sri lanka, 1111111111, editing, Test 1

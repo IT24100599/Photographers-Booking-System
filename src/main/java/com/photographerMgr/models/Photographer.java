@@ -9,17 +9,15 @@ public class Photographer {
     private String address;
     private String phone;
     private String skills;
-    private String experience;
     
     public Photographer() {
 		this.gender = "Hidden";
 		this.address = "Null";
 		this.phone = "Null";
 		this.skills = "Null";
-		this.experience = "Null";
     }
 
-    public Photographer(String username, String password, String email, String gender, String address, String phone, String skills, String experience, String fName) {
+    public Photographer(String username, String password, String email, String gender, String address, String phone, String skills, String fName) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -28,8 +26,16 @@ public class Photographer {
         setAddress(address); // Using setter to validate/transform address
         this.phone = phone;
         setSkills(skills);
-        this.experience = experience;
     }
+
+    
+    public String getDefaultProfilePic() {
+		 if (gender!="Hidden") {
+			return gender.toLowerCase() + ".gif";
+		} else {
+			return "unknown.gif";
+		}
+	}
     
     // Getters and setters
     public String getUsername() {
@@ -120,13 +126,6 @@ public class Photographer {
         return "";
     }
     
-    public String getExperience(String experience) {
-    	return experience;
-    }
-    
-    public void setExperience(String experience) {
-    	this.experience = experience;
-    }
     
     public String getFullName() {
 		return fullName;
@@ -139,6 +138,6 @@ public class Photographer {
 
     @Override
     public String toString() {
-        return username + ", " + password + ", " + email + ", " + fullName + ", " + gender + ", " + address + ", " + phone + ", " + skills+", "+experience;
+        return username + ", " + password + ", " + email + ", " + gender + ", " + address + ", " + phone + ", " + skills+", "+fullName;
     }
 }

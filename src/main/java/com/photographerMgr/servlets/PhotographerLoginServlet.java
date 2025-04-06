@@ -20,6 +20,11 @@ public class PhotographerLoginServlet extends HttpServlet {
         PhotographerDataProcessor processor = new PhotographerDataProcessor();
         Photographer photographer = processor.authenticateUser(userIdentifier, password);
         
+        System.out.println("User Identifier: " + userIdentifier);
+        System.out.println("Password: " + password);
+        
+        System.out.println("Authenticated Photographer: " + photographer);
+        
         if (photographer != null) {
             // Successful login
             HttpSession session = request.getSession();

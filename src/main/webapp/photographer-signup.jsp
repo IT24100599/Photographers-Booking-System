@@ -41,9 +41,9 @@
                         <h2>Sign Up</h2>
                     
                         <div class="input-box">
-                            <input type="text" id="photographer-name-input" name="fullName" placeholder=" ">
-                            <label for="photographer-name-input">Full Name</label>
-                            <i class="icon fas fa-user"></i>
+                            <input type="text" id="photographer-email-input" name="fullName" required placeholder=" ">
+                            <label for="photographer-email-input">Full Name</label>
+                            <i class="icon fas fa-envelope"></i>
                         </div>
                         
                         <div class="input-box">
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="input-box">
-                            <input type="text" id="photographer-email-input" name="email"  name="username" required placeholder=" ">
+                            <input type="text" id="photographer-email-input" name="email" required placeholder=" ">
                             <label for="photographer-email-input">Email</label>
                             <i class="icon fas fa-envelope"></i>
                         </div>
@@ -83,7 +83,7 @@
                         </div>
                         
                         <div class="input-box">
-                            <input type="text" id="photographer-specialty-input" required placeholder=" ">
+                            <input type="text" id="photographer-specialty-input" name="skills" required placeholder=" ">
                             <label for="photographer-specialty-input">Photography Specialty</label>
                             <i class="icon fas fa-camera"></i>
                         </div>

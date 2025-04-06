@@ -1,10 +1,6 @@
 package com.photographerMgr.services;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -21,6 +17,7 @@ public class PhotographerDeletionManager {
         Queue<String> photographerQueue = loadPhotographerIntoQueue();
         boolean photographerFound = false;
         
+        
         try {
             // Convert queue to array for bubble search
             String[] photographerArray = photographerQueue.toArray(new String[0]);
@@ -31,6 +28,7 @@ public class PhotographerDeletionManager {
             if (photographerIndex != -1) {
                 // Remove the user by rebuilding the array
                 String[] newPhotographerArray = new String[photographerArray.length - 1];
+                
                 
                 // Copy elements before the index
                 for (int i = 0; i < photographerIndex; i++) {
