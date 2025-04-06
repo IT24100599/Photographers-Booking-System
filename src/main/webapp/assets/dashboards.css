@@ -206,6 +206,7 @@ header h1 span {
     position: relative;
     cursor: pointer;
     transition: transform 0.2s ease;
+
 }
 
 .notifications:hover {

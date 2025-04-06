@@ -43,7 +43,7 @@
                     <% } %>
                 <div class="user-info">
                     <div class="notifications">
-                        <i class="fas fa-bell"></i>
+                        <i style="color: white !important;" class="fas fa-bell"></i>
                         <span class="badge">2</span>
                     </div>
                     <div class="user-avatar">
