@@ -24,8 +24,8 @@
                 <li><a href="#"><i class="fas fa-calendar"></i> My Bookings</a></li>
                 <li><a href="#"><i class="fas fa-camera"></i> Find Photographers</a></li>
                 <li><a href="#"><i class="fas fa-history"></i> Booking History</a></li>
-                <li class="active"><a href="customer.html"><i class="fas fa-user"></i> My Profile</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li class="active"><a><i class="fas fa-user"></i> My Profile</a></li>
+                <li><a href="customer-settings.jsp"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
             <div class="sidebar-footer">
                 <a href="logoutCustomer.jsp" class="logout-btn btn-animated"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -50,7 +50,7 @@
                     
                     <div class="user-avatar">
                     	<% if (user != null) { %>                  		
-                    		<img src="assets/defaults/<%=user.getDefaultProfilePic()%>" alt="Profile Picture" id="profile-picture">
+                    		<img src="displayProfilePicUSER?targetName=<%= user.getUsername() %>" alt="Profile Picture" id="profile-picture">
                         <% } else { %>
 		                    <img src="assets/defaults/unknown.gif" alt="Profile Picture" id="profile-picture">
                	        <% } %>
@@ -62,6 +62,33 @@
             <div class="content-section glass-card">
                 <div class="profile-section">
     			<% if (user != null) { %>
+    				<div class="profile-header">
+                        <h2>Profile Picture</h2>
+                    </div>
+                    
+                    <form action="uploadProfilePicUSER" method="post" enctype="multipart/form-data" class="profile-picture-form">
+                        <input type="hidden" name="targetName" value="<%= user.getUsername() %>">
+                        <div class="profile-picture-upload">
+                            <div class="profile-picture-container glass-card">
+                                <img src="displayProfilePicUSER?targetName=<%= user.getUsername() %>" alt="Profile Picture" id="profile-picture-preview">
+                                <div class="profile-picture-overlay">
+                                    <button type="button" class="btn-animated picture-btn" onclick="triggerFileInput()">
+                                        <i class="fas fa-camera"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <input type="file" id="profile-picture-input" name="profilePic" accept="image/*" class="hidden-file-input">
+                            <button type="submit" class="btn-animated picture-submit-btn hidden">
+                                <i class="fas fa-save"></i> Save Photo
+                            </button>
+                        </div>
+                    </form>
+                    <% if (request.getAttribute("errorMessage") != null) { %>
+        				<p style="color: red;"><%= request.getAttribute("errorMessage") %></p>
+    				<% } %>
+                    <hr class="glass-hr">
+                    <br>
+    			
                     <div class="profile-header">
                         <h2>My Profile</h2>
                         <button type="button" id="edit-profile-btn" class="btn-animated" onclick="handleEditProfile(event)"><i class="fas fa-edit"></i> Edit Profile</button>
@@ -156,15 +183,7 @@
                             <button type="button" class="btn btn-animated cancel-btn" id="cancel-edit-btn" onclick="handleCancelEdit(event)">Cancel</button>
                         </div>
                     </form>
-                    
-                    <div class="delete-profile-container">
-                    		
-                        <form>
-                            <button type="button" class="btn btn-animated delete-btn" id="delete-profile-btn" onclick="handleDeleteProfile(event)">
-                            	<i class="fas fa-trash-alt"></i> Delete Profile
-                        	</button>
-                        </form>
-                    </div>
+
         		
    					 <% } else { %>
         			<p>No user found in session. Please <a class="refLink" href="customer-login.jsp" >login</a>.</p>
@@ -173,23 +192,7 @@
             </div>
         </div>
     </div>
-    
-
-    <div class="modal" id="delete-confirmation-modal">
-        <div class="modal-content glass-card">
-            <h3><i class="fas fa-exclamation-triangle"></i> Delete Profile</h3>
-            <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
-            <% if (user != null) { %>
-            <div class="modal-actions">
-            	<form action="DeleteServlet" method="post">
-            		<input type="hidden" name="originalUsername" value="<%= user.getUsername() %>">
-                	<button type="button" class="btn btn-animated cancel-modal-btn" onclick="handleCancelDelete(event)">Cancel</button>
-                	<button type="submit" class="button btn btn-animated confirm-delete-btn">Yes, Delete My Profile</button> <!-- onclick="handleConfirmDelete(event)" -->
-                </form>
-            </div>
-            <% } %>
-        </div>
-    </div>
+   
     
     <!--  <script src="assets/main.js"></script> -->
     <script src="assets/dashboards.js"></script>

@@ -1655,3 +1655,98 @@ form {
     z-index: 5;
     pointer-events: auto;
 }
+
+/* Profile Picture Upload Styling */
+.profile-picture-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.profile-picture-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-picture-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.profile-picture-container:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.profile-picture-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-picture-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4), transparent);
+    padding: 30px 0 15px;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.profile-picture-container:hover .profile-picture-overlay {
+    opacity: 1;
+}
+
+.picture-btn {
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    padding: 6px 12px;
+}
+
+.picture-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.picture-submit-btn {
+    background: rgba(76, 175, 80, 0.3);
+    font-size: 0.9rem;
+    padding: 6px 15px;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+
+.picture-submit-btn:hover {
+    background: rgba(76, 175, 80, 0.5);
+}
+
+.hidden-file-input {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.inp-label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.glass-hr {
+    border-radius: 10px;
+	border: 1.5px solid rgba(255, 255, 255, 0.1);
+}

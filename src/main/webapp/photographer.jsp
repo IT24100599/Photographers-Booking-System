@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Dashboard</title>
     <link rel="stylesheet" href="assets/main.css">
-    <link rel="stylesheet" href="assets/dashboards.css">
+    <link rel="stylesheet" href="assets/dashboards.css" defer>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="user-avatar">
                     	<% if (photographer != null) { %>                  		
-                    		<img src="assets/defaults/<%=photographer.getDefaultProfilePic()%>" alt="Profile Picture" id="profile-picture">
+                    		<img src="displayProfilePic?targetName=<%= photographer.getUsername() %>" alt="Profile Picture" id="profile-picture">
                         <% } else { %>
 		                    <img src="assets/defaults/unknown.gif" alt="Profile Picture" id="profile-picture">
                	        <% } %>
@@ -61,7 +61,35 @@
                 <div class="profile-section">
 
                 <!--Start-->
-    			<% if (photographer != null) { %>
+    			<% if (photographer != null) { %>   			   			    			
+                    <div class="profile-header">
+                        <h2>Profile Picture</h2>
+                    </div>
+                    
+                    <form action="uploadProfilePic" method="post" enctype="multipart/form-data" class="profile-picture-form">
+                        <input type="hidden" name="targetName" value="<%= photographer.getUsername() %>">
+                        <div class="profile-picture-upload">
+                            <div class="profile-picture-container glass-card">
+                                <img src="displayProfilePic?targetName=<%= photographer.getUsername() %>" alt="Profile Picture" id="profile-picture-preview">
+                                <div class="profile-picture-overlay">
+                                    <button type="button" class="btn-animated picture-btn" onclick="triggerFileInput()">
+                                        <i class="fas fa-camera"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <input type="file" id="profile-picture-input" name="profilePic" accept="image/*" class="hidden-file-input">
+                            <button type="submit" class="btn-animated picture-submit-btn hidden">
+                                <i class="fas fa-save"></i> Save Photo
+                            </button>
+                        </div>
+                    </form>
+                    <% if (request.getAttribute("errorMessage") != null) { %>
+        				<p style="color: red;"><%= request.getAttribute("errorMessage") %></p>
+    				<% } %>
+                    <hr class="glass-hr">
+                    <br>
+                    
+                    
                     <div class="profile-header">
                         <h2>My Profile</h2>
                         <button type="button" id="edit-profile-btn" class="btn-animated" onclick="handleEditProfile(event)"><i class="fas fa-edit"></i> Edit Profile</button>
@@ -157,6 +185,7 @@
                         </div>
                     </form>
                     
+                     
         		
    					 <% } else { %>
         			<h1>No user found in session. Please <a class="refLink" href="photographer-login.jsp" >login</a>.</h1>
