@@ -43,7 +43,7 @@ public class PhotographerDataProcessor {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
 
-                if (parts.length >= 8) {
+                if (parts.length >= 10) {
                     String username = parts[0];
                     String pwd = parts[1];
                     String email = parts[2];
@@ -52,8 +52,12 @@ public class PhotographerDataProcessor {
                     String phone = parts[5];
                     String skills = parts[6];
                     String fullName = parts[7];
+                    String experience = parts[8];
+                    String description = parts[9];
 
                     Photographer photographer = new Photographer(username, pwd, email, gender, address, phone, skills, fullName);
+                    photographer.setExperience(experience);
+                    photographer.setDescription(description);
                     photographers.add(photographer);
                 }
             }

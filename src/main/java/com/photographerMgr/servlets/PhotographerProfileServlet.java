@@ -35,6 +35,8 @@ public class PhotographerProfileServlet extends HttpServlet {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String skills = request.getParameter("skills");
+        String description = request.getParameter("description");
+        String experience = request.getParameter("experience");
         
         // Create a UserValidator to check for duplicates
         PhotographerValidator validator = new PhotographerValidator();
@@ -67,9 +69,11 @@ public class PhotographerProfileServlet extends HttpServlet {
         }
         
         Photographer updatedPhotographer = new Photographer(username, password, email, gender, address, phone, skills, fullName);
+        updatedPhotographer.setExperience(experience);
+        updatedPhotographer.setDescription(description);
         
         PhotographerProfileManager profileManager = new PhotographerProfileManager();
-        boolean success = profileManager.updatePhotographerProfile(originalUsername, originalEmail, updatedPhotographer);
+        boolean success = profileManager.updatePhotographerProfile(originalUsername, originalEmail, updatedPhotographer, experience, description);
         
         if (success) {
             // Update the session with the new user data

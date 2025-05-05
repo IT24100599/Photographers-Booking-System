@@ -9,6 +9,8 @@ public class Photographer {
     private String address;
     private String phone;
     private String skills;
+    private String description;
+    private String experience;
     
     public Photographer() {
 		this.gender = "Hidden";
@@ -26,6 +28,8 @@ public class Photographer {
         setAddress(address); // Using setter to validate/transform address
         this.phone = phone;
         setSkills(skills);
+        this.description = "N/A";
+        this.experience = "N/A";
     }
 
     
@@ -134,6 +138,22 @@ public class Photographer {
     public void setFullName(String fullName) {
     	this.fullName = fullName;
     }
+    
+    public void setExperience(String experience) {
+    	this.experience = experience;
+    }
+    
+    public String getExperience() {
+    			return experience;
+    }
+    
+    public void setDescription(String description) {
+    	this.description = description;
+    }
+    
+    public String getDescription() {
+		return description;
+	}
    
 
     @Override

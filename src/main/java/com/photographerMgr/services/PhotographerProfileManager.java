@@ -22,7 +22,7 @@ public class PhotographerProfileManager {
      * @param updatedUser the updated photographer information
      * @return true if update was successful, false otherwise
      */
-    public boolean updatePhotographerProfile(String originalUsername, String originalEmail, Photographer updatedUser) {
+    public boolean updatePhotographerProfile(String originalUsername, String originalEmail, Photographer updatedUser, String experience, String description) {
         List<String> photographers = loadPhotographersFromFile();
         boolean photographerFound = false;
         int indexToUpdate = -1;
@@ -39,7 +39,7 @@ public class PhotographerProfileManager {
         if (photographerFound) {
             try {
                 // Update the photographer record
-                photographers.set(indexToUpdate, updatedUser.toString());
+                photographers.set(indexToUpdate, updatedUser.toString()+", " + experience + ", " + description);
 
                 // Write all records back to the file
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {

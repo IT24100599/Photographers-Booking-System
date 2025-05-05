@@ -152,6 +152,15 @@
                                 </div>
                             </div>
                             
+                            <div class="profile-field edit-only" style="display: none;">
+                                <label>New Password</label>
+                                <div class="input-box glass-input">
+                                    <input type="password" id="password secondary-address-input" minlength="6" name="password" value="<%= photographer.getPassword() %>" placeholder="Your Password"disabled>
+                                    <i class="icon fas fa-lock"></i>
+                                </div>
+                            </div>
+                            
+                        
                             
                             <div class="profile-field">
                                 <label>Skills</label>
@@ -161,15 +170,23 @@
                                 </div>
                             </div>
                             
-                            <div class="profile-field edit-only" style="display: none;">
-                                <label>New Password</label>
+                            <div class="profile-field">
+                                <label>Description</label>
                                 <div class="input-box glass-input">
-                                    <input type="password" id="password secondary-address-input" minlength="6" name="password" value="<%= photographer.getPassword() %>" placeholder="Your Password"disabled>
-                                    <i class="icon fas fa-lock"></i>
+                                    <input type="text" id="customer-preferences-input" name="description" value="<%= photographer.getDescription() %>" required disabled>
+                                    <i class="icon fas fa-image"></i>
                                 </div>
                             </div>
                             
-                        </div>
+                            <div class="profile-field">
+                                <label>Experience</label>
+                                <div class="input-box glass-input">
+                                    <input type="text" id="customer-preferences-input" name="experience" value="<%= photographer.getExperience() %>" required disabled>
+                                    <i class="icon fas fa-image"></i>
+                                </div>
+                            </div>
+                            
+                            </div>
                         
                         	<% if (request.getAttribute("message") != null) { %>
     	        	    	<p style="color: green;"><%= request.getAttribute("message") %></p>

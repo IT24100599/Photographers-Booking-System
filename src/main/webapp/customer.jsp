@@ -22,7 +22,7 @@
             <ul class="nav-links">
                 <li><a href="#"><i class="fas fa-building"></i> Dashboard</a></li>
                 <li><a href="#"><i class="fas fa-calendar"></i> My Bookings</a></li>
-                <li><a href="#"><i class="fas fa-camera"></i> Find Photographers</a></li>
+                <li><a href="findPhotographers.jsp"><i class="fas fa-camera"></i> Find Photographers</a></li>
                 <li><a href="#"><i class="fas fa-history"></i> Booking History</a></li>
                 <li class="active"><a><i class="fas fa-user"></i> My Profile</a></li>
                 <li><a href="customer-settings.jsp"><i class="fas fa-cog"></i> Settings</a></li>
