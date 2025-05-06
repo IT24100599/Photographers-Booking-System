@@ -1,0 +1,6 @@
+John Doe,4.8,2500,Wedding
+Jane Smith,4.6,1800,Corporate
+Mark Brown,5.0,2000,Wedding
+Emily Davis,4.5,1400,Portrait
+David Johnson,4.9,1800,Corporate
+Sophia Wilson,4.7,1100,Portrait
