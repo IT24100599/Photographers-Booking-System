@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Event_Photography_and_Videography_Booking_System:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Event_Photography_and_Videography_Booking_System_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Event_Photography_and_Videography_Booking_System" />
+          <element id="library" level="application" name="bootstrap" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Event_Photography_and_Videography_Booking_System/web/Web" />
+    </root>
+  </artifact>
+</component>

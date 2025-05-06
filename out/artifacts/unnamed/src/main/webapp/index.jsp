@@ -11,17 +11,13 @@
     <script>
         function sortTable(columnIndex) {
             let table = document.getElementById("photographerTable");
-            let tbody = table.tBodies[0];
-            let rows = Array.from(tbody.rows); // Only rows in tbody
+            let rows = Array.from(table.rows).slice(1); // Exclude header row
             let sortedRows = rows.sort((rowA, rowB) => {
-            let valA = parseFloat(rowA.cells[columnIndex].textContent);
-            let valB = parseFloat(rowB.cells[columnIndex].textContent);
-            return valB - valA; // Descending order
-        });
-        while (tbody.firstChild) {
-                tbody.removeChild(tbody.firstChild);
-            }
-            sortedRows.forEach(row => tbody.appendChild(row));
+                let valA = parseFloat(rowA.cells[columnIndex].textContent);
+                let valB = parseFloat(rowB.cells[columnIndex].textContent);
+                return valB - valA; // Descending order
+            });
+            sortedRows.forEach(row => table.appendChild(row));
         }
     </script>
 </head>

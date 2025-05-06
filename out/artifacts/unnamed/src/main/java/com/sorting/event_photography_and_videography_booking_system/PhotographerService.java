@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhotographerService {
-    private static final String FILE_PATH = "D:/Project/Event Photography and Videography Booking System/src/main/webapp/Database/photographers.txt";
+    private static final String FILE_PATH = "D:/project/Event Photography and Videography Booking System/src/main/webapp/Database/photographers.txt";
 
     // Read photographers from file
     public List<Photographer> getPhotographers() {
