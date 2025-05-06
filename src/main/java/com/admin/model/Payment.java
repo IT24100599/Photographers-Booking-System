@@ -1,4 +1,4 @@
-package com.admin.eventphotographyandvideographybookingsystem;
+package com.admin.model;
 
 public class Payment {
     private String paymentId;

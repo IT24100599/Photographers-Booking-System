@@ -48,12 +48,96 @@
                         <label id="email-label">Email</label>
                         <i class="icon fas fa-envelope"></i>
                     </div>
+
+
+                    <!--<div class="input-box" style="position: relative; margin: 25px 0; width: 100%;">
+                        <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                required
+                                placeholder=" "
+                                style="width: 100%; padding: 15px 45px 15px 15px; border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 6px; font-size: 16px; color: #000; background: rgba(255, 255, 255, 0.9); transition: all 0.3s ease; height: 50px; box-sizing: border-box;"
+                        >
+                        <label
+                                id="password-label"
+                                style="position: absolute; left: 15px; top: 15px; color: #666; font-size: 16px; transition: all 0.3s ease; pointer-events: none; background: transparent; padding: 0 5px;"
+                        >Password</label>
+                        <i
+                                class="icon fas fa-lock"
+                                style="position: absolute; right: 45px; top: 50%; transform: translateY(-50%); color: #666; font-size: 16px;"
+                        ></i>
+                        <i
+                                class="icon fas fa-eye password-toggle"
+                                id="show-password"
+                                style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #666; font-size: 16px; cursor: pointer; z-index: 2;"
+                        ></i>
+                    </div>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const passwordField = document.getElementById('password');
+                            const showPasswordToggle = document.getElementById('show-password');
+                            const lockIcon = document.querySelector('.fa-lock');
+
+                            if (passwordField && showPasswordToggle) {
+                                showPasswordToggle.addEventListener('click', function() {
+                                    // Toggle password visibility
+                                    if (passwordField.type === 'password') {
+                                        passwordField.type = 'text';
+                                        this.classList.remove('fa-eye');
+                                        this.classList.add('fa-eye-slash');
+                                        if (lockIcon) lockIcon.style.display = 'none';
+                                    } else {
+                                        passwordField.type = 'password';
+                                        this.classList.remove('fa-eye-slash');
+                                        this.classList.add('fa-eye');
+                                        if (lockIcon) lockIcon.style.display = 'block';
+                                    }
+
+                                    // Handle label position when typing
+                                    if (passwordField.value.length > 0) {
+                                        document.getElementById('password-label').style.top = '-10px';
+                                        document.getElementById('password-label').style.left = '10px';
+                                        document.getElementById('password-label').style.fontSize = '12px';
+                                        document.getElementById('password-label').style.background = 'white';
+                                    } else {
+                                        document.getElementById('password-label').style.top = '15px';
+                                        document.getElementById('password-label').style.left = '15px';
+                                        document.getElementById('password-label').style.fontSize = '16px';
+                                        document.getElementById('password-label').style.background = 'transparent';
+                                    }
+                                });
+
+                                // Handle label on input focus/blur
+                                passwordField.addEventListener('focus', function() {
+                                    document.getElementById('password-label').style.top = '-10px';
+                                    document.getElementById('password-label').style.left = '10px';
+                                    document.getElementById('password-label').style.fontSize = '12px';
+                                    document.getElementById('password-label').style.background = 'white';
+                                });
+
+                                passwordField.addEventListener('blur', function() {
+                                    if (this.value.length === 0) {
+                                        document.getElementById('password-label').style.top = '15px';
+                                        document.getElementById('password-label').style.left = '15px';
+                                        document.getElementById('password-label').style.fontSize = '16px';
+                                        document.getElementById('password-label').style.background = 'transparent';
+                                    }
+                                });
+                            }
+                        });
+                    </script>-->
+
                     <div class="input-box">
-                        <input type="password" id="password password-input" minlength="" name="password" required
+                        <input type="password" id="password" minlength="" name="password" required
                                placeholder=" ">
                         <label id="password-label">Password</label>
+                        <i class="icon-right fas fa-eye password-toggle" id="show-password" ></i>
                         <i class="icon fas fa-lock"></i>
                     </div>
+
+
                     <button type="submit" class="btn">
                         Login
                     </button>
@@ -67,7 +151,7 @@
 </div>
 
 <!-- Custom scripts for all pages-->
-<script src="js/main.js"></script>
+<!--<script src="js/main.js"></script>-->
 
 </body>
 

@@ -11,7 +11,7 @@
     <!-- RegisterServlet Configuration -->
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.admin.eventphotographyandvideographybookingsystem.RegisterServlet</servlet-class>
+        <servlet-class>com.admin.servlet.RegisterServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -22,7 +22,7 @@
     <!-- LoginServlet Configuration -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.admin.eventphotographyandvideographybookingsystem.LoginServlet</servlet-class>
+        <servlet-class>com.admin.servlet.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -33,7 +33,7 @@
     <!-- LogoutServlet Configuration -->
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>com.admin.eventphotographyandvideographybookingsystem.LogoutServlet</servlet-class>
+        <servlet-class>com.admin.servlet.LogoutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

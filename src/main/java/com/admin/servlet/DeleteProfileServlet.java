@@ -1,4 +1,4 @@
-package com.admin.eventphotographyandvideographybookingsystem;
+package com.admin.servlet;
 
 import java.io.*;
 import javax.servlet.ServletException;

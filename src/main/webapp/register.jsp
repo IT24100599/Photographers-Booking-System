@@ -75,21 +75,21 @@
                 </div>
 
                 <div class="input-box">
-                    <input type="password" id="password password-input" minlength="" name="password" required
+                    <input type="password" id="password-input" minlength="" name="password" required
                            placeholder=" ">
                     <label id="password-label">Password</label>
+                    <i class="icon-right fas fa-eye password-toggle" id="show-password"></i>
                     <i class="icon fas fa-lock"></i>
                 </div>
 
                 <div class="input-box">
                     <input type="password" id="confirm-password-input" minlength="" required placeholder=" ">
                     <label id="confirm-password-label">Confirm Password</label>
+                    <i class="icon-right fas fa-eye password-toggle" id="show-password"></i>
                     <i class="icon fas fa-lock"></i>
                     <span id="password-error"
                           style="color: red; font-size: 12px; display: none;">Passwords do not match</span>
-
                 </div>
-
 
                 <div class="remember-forgot">
                     <label><input type="checkbox" required>I agree to the <a href="#">Terms & Conditions</a></label>

@@ -1,4 +1,7 @@
-package com.admin.eventphotographyandvideographybookingsystem;
+package com.admin.servlet;
+
+import com.admin.model.Admin;
+import com.admin.util.FileReaderUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

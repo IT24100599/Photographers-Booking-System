@@ -1,6 +1,5 @@
-U001,John Doe,Customer,true
-U002,Emily Smith,Customer,true
-P001,Michael Brown,Photographer,false
-P002,Sophia Johnson,Photographer,true
-A001,Admin,Admin,true
-
+U001,john.smith,john.smith@email.com,CUSTOMER,ACTIVE
+U002,sarah.j,admin@photography.com,ADMIN,ACTIVE
+U003,mike.brown,mike.b@email.com,CUSTOMER,SUSPENDED
+U004,emily.d,emily.d@email.com,CUSTOMER,INACTIVE
+U005,david.w,david.w@email.com,CUSTOMER,ACTIVE

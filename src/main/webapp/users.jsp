@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ page import="com.admin.model.Booking" %>
+<%@ page import="com.admin.model.User" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
 <%
   HttpSession sessionObj = request.getSession(false);
   if (sessionObj == null || sessionObj.getAttribute("adminUser") == null) {
@@ -10,9 +9,9 @@
   }
 
   String userName = (String) sessionObj.getAttribute("userName");
-  List<Booking> bookings = (List<Booking>) request.getAttribute("bookings");
-  if (bookings == null) {
-    response.sendRedirect("BookingServlet?action=list");
+  List<User> users = (List<User>) request.getAttribute("users");
+  if (users == null) {
+    response.sendRedirect("UserServlet?action=list");
     return;
   }
 %>
@@ -23,7 +22,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>View All Bookings</title>
+    <title>Manage Users</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/admin.css" rel="stylesheet">
@@ -78,7 +77,7 @@
             </div>
 
             <!-- Nav Item - Bookings -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="bookings.jsp">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>View All Bookings</span>
@@ -86,7 +85,7 @@
             </li>
 
             <!-- Nav Item - Users -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="users.jsp">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Manage <br>Users</span>
@@ -155,47 +154,42 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h1 class="h3 mb-4 text-gray-800">View All Bookings</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Manage Users</h1>
                     
-                    <!-- Bookings Table -->
+                    <!-- Users Table -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">All Bookings</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">All Users</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="bookingsTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Booking ID</th>
-                                            <th>Customer Name</th>
-                                            <th>Event Type</th>
-                                            <th>Event Date</th>
-                                            <th>Location</th>
-                                            <th>Payment</th>
+                                            <th>User ID</th>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% for (Booking booking : bookings) { %>
+                                        <% for (User user : users) { %>
                                         <tr>
-                                            <td><%= booking.getBookingId() %></td>
-                                            <td><%= booking.getCustomerName() %></td>
-                                            <td><%= booking.getEventType() %></td>
-                                            <td><%= booking.getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) %></td>
-                                            <td><%= booking.getLocation() %></td>
-                                            <td>$<%= String.format("%.2f", booking.getPayment()) %></td>
-                                            <td><%= booking.getStatus() %></td>
+                                            <td><%= user.getUserId() %></td>
+                                            <td><%= user.getUsername() %></td>
+                                            <td><%= user.getEmail() %></td>
+                                            <td><%= user.getRole() %></td>
+                                            <td><%= user.getStatus() %></td>
                                             <td>
-                                                <form action="BookingServlet" method="post" style="display: inline;">
+                                                <form action="UserServlet" method="post" style="display: inline;">
                                                     <input type="hidden" name="action" value="update">
-                                                    <input type="hidden" name="bookingId" value="<%= booking.getBookingId() %>">
+                                                    <input type="hidden" name="userId" value="<%= user.getUserId() %>">
                                                     <select name="status" class="form-control" onchange="this.form.submit()">
-                                                        <option value="PENDING" <%= "PENDING".equals(booking.getStatus()) ? "selected" : "" %>>Pending</option>
-                                                        <option value="CONFIRMED" <%= "CONFIRMED".equals(booking.getStatus()) ? "selected" : "" %>>Confirmed</option>
-                                                        <option value="COMPLETED" <%= "COMPLETED".equals(booking.getStatus()) ? "selected" : "" %>>Completed</option>
-                                                        <option value="CANCELLED" <%= "CANCELLED".equals(booking.getStatus()) ? "selected" : "" %>>Cancelled</option>
+                                                        <option value="ACTIVE" <%= "ACTIVE".equals(user.getStatus()) ? "selected" : "" %>>Active</option>
+                                                        <option value="INACTIVE" <%= "INACTIVE".equals(user.getStatus()) ? "selected" : "" %>>Inactive</option>
+                                                        <option value="SUSPENDED" <%= "SUSPENDED".equals(user.getStatus()) ? "selected" : "" %>>Suspended</option>
                                                     </select>
                                                 </form>
                                             </td>
@@ -221,8 +215,8 @@
     <script src="js/admin.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#bookingsTable').DataTable();
+            $('#usersTable').DataTable();
         });
     </script>
 </body>
-</html>
+</html> 
