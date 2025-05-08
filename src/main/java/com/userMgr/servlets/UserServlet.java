@@ -3,6 +3,8 @@ package com.userMgr.servlets;
 import java.io.FileWriter;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.userMgr.models.User;
 import com.userMgr.services.UserValidator;
+
+
+//Chat
+import com.chat.dao.UserDAO;
+import com.chat.model.Chat;
+import com.chat.util.PasswordUtil;
+
 
 public class UserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -71,6 +80,20 @@ public class UserServlet extends HttpServlet {
             try (FileWriter writer = new FileWriter(FILE_PATH, true)) {
                 writer.write(user.toString() + System.lineSeparator());
             }
+            
+            UserDAO registerChat = new UserDAO();
+            
+            String hashedPassword = PasswordUtil.hashPassword(password);
+            
+            // Create a new user
+            Chat newUser = new Chat();
+            newUser.setUsername(username);
+            newUser.setPassword(hashedPassword);
+            newUser.setEmail(email);
+            newUser.setCreatedAt(new Date());
+            
+            // Save the user to database
+            registerChat.registerUser(newUser);
             
             // Redirect to success page
             response.sendRedirect("customer-login.jsp");

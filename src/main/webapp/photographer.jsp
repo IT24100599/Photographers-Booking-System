@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Dashboard</title>
+    <title>Photographer Profile</title>
     <link rel="stylesheet" href="assets/main.css">
     <link rel="stylesheet" href="assets/dashboards.css" defer>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -22,9 +22,10 @@
             <ul class="nav-links">
                 <li><a href="#"><i class="fas fa-building"></i> Dashboard</a></li>
                 <li><a href="#"><i style="margin: 0 0 0 3px;" class="fas fa-calendar"></i> Bookings</a></li>
-                <li><a href="portfolio.jsp"><i class="fas fa-images"></i> Portfolio</a></li>
                 <li><a href="#"><i style="margin: 0 3px 0 5px;" class="fas fa-dollar-sign"></i> Earnings</a></li>
+                <li><a href="photographer_chatList.jsp"><i class="fas fa-comments"></i> Messages</a></li>
                 <li class="active"><a><i class="fas fa-user"></i> My Profile</a></li>
+                <li><a href="portfolio.jsp"><i class="fas fa-images"></i> Portfolio</a></li>
                 <li><a href="photographer-settings.jsp"><i class="fas fa-cog"></i> Settings</a></li> 
             </ul>
             <div class="sidebar-footer">
@@ -36,11 +37,9 @@
         <div class="main-content">
             <header class="glass-card">
             
-            	<%if(photographer!=null) { %>
-                	<h1>Welcome, <span id="customer-name"><%=photographer.getFullName()%></span>!</h1>
-                <% } else {%>
-                    <h1>Welcome to Dashboard !</h1>
-                    <% } %>
+            	
+                	<h1>My Chat</h1>
+                
                 <div class="user-info">
                     <div class="notifications">
                         <i style="color: white !important;" class="fas fa-bell"></i>
@@ -91,7 +90,7 @@
                     
                     
                     <div class="profile-header">
-                        <h2>My Profile</h2>
+                        <h2>Photographer Profile</h2>
                         <button type="button" id="edit-profile-btn" class="btn-animated" onclick="handleEditProfile(event)"><i class="fas fa-edit"></i> Edit Profile</button>
                     </div>
                     
@@ -166,7 +165,7 @@
                                 <label>Skills</label>
                                 <div class="input-box glass-input">
                                     <input type="text" id="customer-preferences-input" name="skills" value="<%= photographer.getOriginalSkills() %>" required disabled>
-                                    <i class="icon fas fa-image"></i>
+                                    <i class="icon fas fa-star"></i>
                                 </div>
                             </div>
                             
@@ -174,7 +173,7 @@
                                 <label>Description</label>
                                 <div class="input-box glass-input">
                                     <input type="text" id="customer-preferences-input" name="description" value="<%= photographer.getDescription() %>" required disabled>
-                                    <i class="icon fas fa-image"></i>
+                                    <i class="icon fas fa-book"></i>
                                 </div>
                             </div>
                             
@@ -182,7 +181,7 @@
                                 <label>Experience</label>
                                 <div class="input-box glass-input">
                                     <input type="text" id="customer-preferences-input" name="experience" value="<%= photographer.getExperience() %>" required disabled>
-                                    <i class="icon fas fa-image"></i>
+                                    <i class="icon fas fa-briefcase"></i>
                                 </div>
                             </div>
                             

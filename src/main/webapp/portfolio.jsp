@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>My Portfolio</title>
     <link rel="stylesheet" href="assets/main.css">
     <link rel="stylesheet" href="assets/dashboards.css">
     <link rel="stylesheet" href="assets/portfolio.css">
@@ -27,9 +27,10 @@
             <ul class="nav-links">
                 <li><a href="#"><i class="fas fa-building"></i> Dashboard</a></li>
                 <li><a href="#"><i style="margin: 0 0 0 3px;" class="fas fa-calendar"></i> Bookings</a></li>
-                <li class="active"><a href="portfolio.jsp"><i class="fas fa-images"></i> Portfolio</a></li>
                 <li><a href="#"><i style="margin: 0 3px 0 5px;" class="fas fa-dollar-sign"></i> Earnings</a></li>
+                <li><a href="photographer_chatList.jsp"><i class="fas fa-comments"></i> Messages</a></li>
                 <li><a href="photographer.jsp"><i class="fas fa-user"></i> My Profile</a></li>
+                <li class="active"><a><i class="fas fa-images"></i> Portfolio</a></li>
                 <li><a href="photographer-settings.jsp"><i class="fas fa-cog"></i> Settings</a></li> 
             </ul>
             <div class="sidebar-footer">
@@ -43,7 +44,7 @@
             	<%if(photographer!=null) { %>
                 	<h1><span id="customer-name"><%=photographer.getFullName() %></span>'s Portfolio</h1>
                 <% } else {%>
-                    <h1>Photographer Portfolio !</h1>
+                    <h1>My Portfolio</h1>
                     <% } %>
                 <div class="user-info">
                     <div class="notifications">

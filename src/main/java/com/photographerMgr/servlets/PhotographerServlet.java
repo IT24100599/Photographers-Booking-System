@@ -3,12 +3,17 @@ package com.photographerMgr.servlets;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.chat.dao.UserDAO;
+import com.chat.model.Chat;
+import com.chat.util.PasswordUtil;
 import com.photographerMgr.models.Photographer;
 import com.photographerMgr.services.PhotographerValidator;
 
@@ -28,9 +33,7 @@ public class PhotographerServlet extends HttpServlet {
             String phone = request.getParameter("phone");
             String skills = request.getParameter("skills");
             
-            
-            System.out.println("Full name= "+fullName);
-            
+                        
             // Create validator to check for duplicate values
             PhotographerValidator validator = new PhotographerValidator();
             
@@ -61,6 +64,8 @@ public class PhotographerServlet extends HttpServlet {
             // All validations passed, create user
             Photographer photographer = new Photographer(username, password, email, gender, address, phone, skills, fullName);
             
+            String defaults = photographer.getExperience()+", "+photographer.getDescription();
+            
            //Create a new directory for uploads
             try {
 				File uploadDir = new File(UPLOAD_DIRECTORY + username);
@@ -75,8 +80,22 @@ public class PhotographerServlet extends HttpServlet {
             
             
             try (FileWriter writer = new FileWriter(FILE_PATH, true)) {
-                writer.write(photographer.toString() + System.lineSeparator());
+                writer.write(photographer.toString()+ ", " + defaults + System.lineSeparator());
             }
+            
+            UserDAO registerChat = new UserDAO();
+            
+            String hashedPassword = PasswordUtil.hashPassword(password);
+            
+            // Create a new user
+            Chat newUser = new Chat();
+            newUser.setUsername(username);
+            newUser.setPassword(hashedPassword);
+            newUser.setEmail(email);
+            newUser.setCreatedAt(new Date());
+            
+            // Save the user to database
+            registerChat.registerUser(newUser);
             
             // Redirect to success page
             response.sendRedirect("photographer-login.jsp");

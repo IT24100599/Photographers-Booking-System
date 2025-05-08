@@ -22,9 +22,10 @@
             <ul class="nav-links">
                 <li><a href="#"><i class="fas fa-building"></i> Dashboard</a></li>
                 <li><a href="#"><i style="margin: 0 0 0 3px;" class="fas fa-calendar"></i> Bookings</a></li>
-                <li><a href="portfolio.jsp"><i class="fas fa-images"></i> Portfolio</a></li>
                 <li><a href="#"><i style="margin: 0 3px 0 5px;" class="fas fa-dollar-sign"></i> Earnings</a></li>
+                <li><a href="photographer_chatList.jsp"><i class="fas fa-comments"></i> Messages</a></li>
                 <li><a href="photographer.jsp"><i class="fas fa-user"></i> My Profile</a></li>
+                <li><a href="portfolio.jsp"><i class="fas fa-images"></i> Portfolio</a></li>
                 <li class="active"><a><i class="fas fa-cog"></i> Settings</a></li> 
             </ul>
             <div class="sidebar-footer">
@@ -36,11 +37,8 @@
         <div class="main-content">
             <header class="glass-card">
             
-            	<%if(photographer!=null) { %>
-                	<h1>Welcome, <span id="customer-name"><%=photographer.getFullName()%></span>!</h1>
-                <% } else {%>
-                    <h1>Welcome to Dashboard !</h1>
-                    <% } %>
+                    <h1>Photographer Settings</h1>
+                    
                 <div class="user-info">
                     <div class="notifications">
                         <i style="color: white !important;" class="fas fa-bell"></i>

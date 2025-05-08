@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parallax Photography | Home</title>
+    <title>Brand | Home</title>
     <link rel="stylesheet" href="assets/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
     <header>
         <nav class="glass-nav">
             <div class="logo">
-                <h2>Parallax<span>Studio</span></h2>
+                <h2><i class="fas fa-key"></i><span>Brand</span></h2>
             </div>
             <ul class="nav-links">
                 <li><a href="#home" class="active">Home</a></li>

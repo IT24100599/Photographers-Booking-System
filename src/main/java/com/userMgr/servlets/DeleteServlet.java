@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import com.userMgr.models.User;
 import com.userMgr.services.UserDeletionManager;
 
+import com.chat.dao.UserDAO;
+
 public class DeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
@@ -36,17 +38,30 @@ public class DeleteServlet extends HttpServlet {
             return;
         }
         
+        UserDAO userDAO = new UserDAO();
+        
         // Delete the user profile
         UserDeletionManager deletionManager = new UserDeletionManager();
-        boolean success = deletionManager.deleteUserProfile(username);
+        boolean userDel = deletionManager.deleteUserProfile(username);
+        boolean chatDel = userDAO.deleteUserByUsername(username);
+        
+        boolean success = userDel && chatDel;
         
         if (success) {
             // Invalidate session and redirect to a confirmation page
             session.invalidate();
-            response.sendRedirect("customer-login.jsp");
-        } else {
+            response.sendRedirect("index.jsp");
+        } else if (!userDel && chatDel) {
+			// Redirect to error page
+			request.setAttribute("error", "User deleted from chat but failed to delete user profile from database. Please try again.");
+			request.getRequestDispatcher("customer.jsp").forward(request, response);
+		} else if (!chatDel && userDel) {
+			// Redirect to error page
+			request.setAttribute("error", "User deleted from database but failed to delete user from chat. Please contact support.");
+			request.getRequestDispatcher("customer.jsp").forward(request, response);
+    	} else {
             // Redirect to error page
-            request.setAttribute("error", "Failed to delete user profile");
+            request.setAttribute("error", "Failed to delete user profile. Try again or contact support.");
             request.getRequestDispatcher("customer.jsp").forward(request, response);
         }
     }

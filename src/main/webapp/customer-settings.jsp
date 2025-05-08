@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Settings</title>
+    <title>My Settings</title>
     <link rel="stylesheet" href="assets/main.css">
     <link rel="stylesheet" href="assets/dashboards.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -23,7 +23,7 @@
                 <li><a href="#"><i class="fas fa-building"></i> Dashboard</a></li>
                 <li><a href="#"><i class="fas fa-calendar"></i> My Bookings</a></li>
                 <li><a href="findPhotographers.jsp"><i class="fas fa-camera"></i> Find Photographers</a></li>
-                <li><a href="#"><i class="fas fa-history"></i> Booking History</a></li>
+                <li><a href="customer_chatList.jsp"><i class="fas fa-comments"></i> Messages</a></li>
                 <li><a href="customer.jsp"><i class="fas fa-user"></i> My Profile</a></li>
                 <li class="active"><a><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
@@ -38,9 +38,9 @@
             <header class="glass-card">
             
             	<%if(user!=null) { %>
-                	<h1>Welcome, <span id="customer-name"><%= user.getFullName() %></span>!</h1>
+                	<h1><span id="customer-name"><%= user.getFullName() %></span>'s Settings</h1>
                 <% } else {%>
-                    <h1>Welcome to Dashboard !</h1>
+                    <h1>My Settings</h1>
                 <% } %>
                 <div class="user-info">
                     <div class="notifications">
@@ -63,8 +63,7 @@
                 <div class="profile-section">
     			<% if (user != null) { %>
                     <div class="profile-header">
-                        <h2>My Profile</h2>
-                        <button type="button" id="edit-profile-btn" class="btn-animated" onclick="handleEditProfile(event)"><i class="fas fa-edit"></i> Edit Profile</button>
+                        <h2>Profile Settings</h2>
                     </div>
                     
                    
@@ -79,6 +78,12 @@
                             <button type="button" class="btn btn-animated delete-btn" id="delete-profile-btn" onclick="handleDeleteProfile(event)">
                             	<i class="fas fa-trash-alt"></i> Delete Profile
                         	</button>
+                        	<br>
+                        	<hr class="glass-hr">
+                        	<br>
+                        	<div class="profile-header">
+                        		<h2>Website Details</h2>
+                    		</div>
                        
         		
    					 <% } else { %>

@@ -21,8 +21,11 @@ public class PhotographerDataProcessor {
      */
     public Photographer authenticateUser(String userIdentifier, String password) {
         List<Photographer> photographers = loadPhotographersFromFile();
+        
+        System.out.println("User Identifier: " + userIdentifier + ", Password: " + password+"\n");
 
         for (Photographer photographer : photographers) {
+        	System.out.println("Checking photographer: " + photographer.getUsername() + ", Password: " + photographer.getPassword());
             if (isMatchingUser(photographer, userIdentifier, password)) {
                 return photographer;
             }

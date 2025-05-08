@@ -10,6 +10,11 @@ import javax.servlet.http.HttpSession;
 import com.photographerMgr.models.Photographer;
 import com.photographerMgr.services.PhotographerDataProcessor;
 
+//Chat
+import com.chat.dao.UserDAO;
+import com.chat.dao.UserStatusDAO;
+import com.chat.model.Chat;
+
 public class PhotographerLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
@@ -20,16 +25,17 @@ public class PhotographerLoginServlet extends HttpServlet {
         PhotographerDataProcessor processor = new PhotographerDataProcessor();
         Photographer photographer = processor.authenticateUser(userIdentifier, password);
         
-        System.out.println("User Identifier: " + userIdentifier);
-        System.out.println("Password: " + password);
-        
-        System.out.println("Authenticated Photographer: " + photographer);
+        UserDAO userDAO = new UserDAO();
+        Chat client = userDAO.getUserByUsername(userIdentifier);
+
+        UserStatusDAO statusDAO = new UserStatusDAO();
+        statusDAO.updateUserStatus(client.getId(), "online");
         
         if (photographer != null) {
             // Successful login
             HttpSession session = request.getSession();
             session.setAttribute("photographer", photographer);
-            session.setAttribute("loginTime", new java.util.Date());
+            session.setAttribute("chat", client);
             
             response.sendRedirect("photographer.jsp");
         } else {

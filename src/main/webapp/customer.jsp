@@ -3,12 +3,18 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.userMgr.models.User" %>
 
+<% User user = (User)session.getAttribute("user");%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Dashboard</title>
+    <%if(user!=null) { %>
+          <title><%= user.getFullName() %>'s Profile</title>
+    <% } else {%>
+          <title>My Profile</title>
+    <% } %>
     <link rel="stylesheet" href="assets/main.css">
     <link rel="stylesheet" href="assets/dashboards.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -23,7 +29,7 @@
                 <li><a href="#"><i class="fas fa-building"></i> Dashboard</a></li>
                 <li><a href="#"><i class="fas fa-calendar"></i> My Bookings</a></li>
                 <li><a href="findPhotographers.jsp"><i class="fas fa-camera"></i> Find Photographers</a></li>
-                <li><a href="#"><i class="fas fa-history"></i> Booking History</a></li>
+                <li><a href="customer_chatList.jsp"><i class="fas fa-comments"></i> Messages</a></li>
                 <li class="active"><a><i class="fas fa-user"></i> My Profile</a></li>
                 <li><a href="customer-settings.jsp"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
@@ -32,15 +38,14 @@
             </div>
         </div>
         
-        <% User user = (User)session.getAttribute("user");%>
         
         <div class="main-content">
             <header class="glass-card">
             
             	<%if(user!=null) { %>
-                	<h1>Welcome, <span id="customer-name"><%= user.getFullName() %></span>!</h1>
+                	<h1><span id="customer-name"><%= user.getFullName() %></span>'s Profile</h1>
                 <% } else {%>
-                    <h1>Welcome to Dashboard !</h1>
+                    <h1>My Profile</h1>
                 <% } %>
                 <div class="user-info">
                     <div class="notifications">

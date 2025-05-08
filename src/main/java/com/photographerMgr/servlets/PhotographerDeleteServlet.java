@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.chat.dao.UserDAO;
 import com.photographerMgr.models.Photographer;
 import com.photographerMgr.services.PhotographerDeletionManager;
 
@@ -34,9 +35,11 @@ public class PhotographerDeleteServlet extends HttpServlet {
             return;
         }
         
+        UserDAO userDAO = new UserDAO();
+        
         // Delete the user profile
         PhotographerDeletionManager deletionManager = new PhotographerDeletionManager();
-        boolean success = deletionManager.deletePhotographerProfile(username);
+        boolean userDel = deletionManager.deletePhotographerProfile(username);
         
         // Delete the user's upload directory
         String userUploadDirectory = UPLOAD_DIRECTORY + username;
@@ -53,14 +56,26 @@ public class PhotographerDeleteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
         
+        boolean chatDel = userDAO.deleteUserByUsername(username);
+        
+        boolean success = userDel && chatDel;
+        
         if (success) {
             // Invalidate session and redirect to a confirmation page
             session.invalidate();
-            response.sendRedirect("photographer-login.jsp");
-        } else {
+            response.sendRedirect("index.jsp");
+        } else if (!userDel && chatDel) {
+			// Redirect to error page
+			request.setAttribute("error", "User deleted from chat but failed to delete user profile from database. Please try again.");
+			request.getRequestDispatcher("customer.jsp").forward(request, response);
+		} else if (!chatDel && userDel) {
+			// Redirect to error page
+			request.setAttribute("error", "User deleted from database but failed to delete user from chat. Please contact support.");
+			request.getRequestDispatcher("customer.jsp").forward(request, response);
+    	} else {
             // Redirect to error page
-            request.setAttribute("error", "Failed to delete user profile.");
-            request.getRequestDispatcher("photographer.jsp").forward(request, response);
+            request.setAttribute("error", "Failed to delete user profile. Try again or contact support.");
+            request.getRequestDispatcher("customer.jsp").forward(request, response);
         }
     }
 }
