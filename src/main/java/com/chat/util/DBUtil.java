@@ -13,7 +13,7 @@ public class DBUtil {
     // Database connection parameters
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/chatapp?useSSL=false&serverTimezone=UTC";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "Saviru@2015";
+    private static final String JDBC_PASSWORD = "password";
     
     // You should adjust these values based on your actual database configuration
     
