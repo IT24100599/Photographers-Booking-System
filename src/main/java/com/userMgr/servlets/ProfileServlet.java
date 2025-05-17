@@ -37,10 +37,9 @@ public class ProfileServlet extends HttpServlet {
         
         System.out.println(fullName + ", " + username + " " + password + " " + email + "" + gender + " " + address + " " + phone);
         
-        // Create a UserValidator to check for duplicates
+        
         UserValidator validator = new UserValidator();
         
-        // Validate username
         if (!username.equals(originalUsername)) {
             if (validator.isDuplicateUsername(username)) {
             	request.setAttribute("error", "Username already exists! Please choose a different username.");
@@ -49,7 +48,6 @@ public class ProfileServlet extends HttpServlet {
             }
         }
         
-        // Validate email
         if (!email.equals(originalEmail)) {
             if (validator.isDuplicateEmail(email)) {
                 request.setAttribute("error", "Email already exists! Please use a different email address.");
@@ -57,8 +55,6 @@ public class ProfileServlet extends HttpServlet {
                 return;
             }
         }
-        
-        // Validate phone
         if (!phone.equals(originalPhone)) {
             if (validator.isDuplicatePhone(phone)) {
                request.setAttribute("error", "Phone number already exists! Please use a different phone number.");
@@ -81,7 +77,7 @@ public class ProfileServlet extends HttpServlet {
         System.out.println(success);
         
         if (success) {
-            // Update the session with the new user data
+           
             session.setAttribute("user", updatedUser);
             request.setAttribute("message", "Profile updated successfully!");
         } else {

@@ -26,7 +26,7 @@ public class User {
         this.password = password;
         this.email = email;
         this.gender = gender;
-        setAddress(address); // Using setter to validate/transform address
+        setAddress(address); 
         this.phone = phone;
     }
     
@@ -46,7 +46,6 @@ public class User {
 		this.fullName = fullName;
 	}
     
-    // Getters and setters
     public String getUsername() {
         return username;
     }
@@ -84,10 +83,6 @@ public class User {
         return address;
     }
 
-    /**
-     * Sets the address after validating and replacing commas with @;%
-     * @param address the address to set
-     */
     public void setAddress(String address) {
         if (address != null) {
             // Replace all commas with "@;%"
@@ -97,10 +92,6 @@ public class User {
         }
     }
     
-    /**
-     * Returns the original address with commas restored
-     * @return address with original commas
-     */
     public String getOriginalAddress() {
         if (address != null) {
             return address.replace("@;%", ",");

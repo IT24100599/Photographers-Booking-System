@@ -29,18 +29,23 @@ public class LoginServlet extends HttpServlet {
         Chat client = userDAO.getUserByUsername(userIdentifier);
 
         UserStatusDAO statusDAO = new UserStatusDAO();
-        statusDAO.updateUserStatus(client.getId(), "online");
         
         
         if (user != null) {
-            // Successful login
+        	try {
+        		statusDAO.updateUserStatus(client.getId(), "online");
+        	} catch (Exception e) {
+        		request.setAttribute("error", "Database offline. Please try again later.");
+                request.getRequestDispatcher("customer-login.jsp").forward(request, response);
+                return;
+        	}
+
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setAttribute("chat", client);
             
-            response.sendRedirect("customer.jsp");
+            response.sendRedirect("customer-dashboard.jsp");
         } else {
-            // Failed login
             request.setAttribute("error", "Invalid username/email or password");
             request.getRequestDispatcher("customer-login.jsp").forward(request, response);
         }

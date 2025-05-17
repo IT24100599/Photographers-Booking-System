@@ -36,9 +36,11 @@
         <% Photographer photographer = (Photographer)session.getAttribute("photographer"); %>
         <div class="main-content">
             <header class="glass-card">
-            
-            	
-                	<h1>My Chat</h1>
+            	<%if(photographer!=null) { %>
+                	<h1><span id="customer-name"><%= photographer.getFullName() %></span>'s Professional Profile</h1>
+                <% } else {%>
+                    <h1>Professional Profile</h1>
+                <% } %>
                 
                 <div class="user-info">
                     <div class="notifications">

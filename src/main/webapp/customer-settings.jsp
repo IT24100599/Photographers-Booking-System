@@ -20,7 +20,7 @@
         <div class="sidebar glass-card">
             <h2 class="logo"><i class="fas fa-key"></i>Brand</h2>
             <ul class="nav-links">
-                <li><a href="#"><i class="fas fa-building"></i> Dashboard</a></li>
+                <li><a href="customer-dashboard.jsp"><i class="fas fa-building"></i> Dashboard</a></li>
                 <li><a href="#"><i class="fas fa-calendar"></i> My Bookings</a></li>
                 <li><a href="findPhotographers.jsp"><i class="fas fa-camera"></i> Find Photographers</a></li>
                 <li><a href="customer_chatList.jsp"><i class="fas fa-comments"></i> Messages</a></li>

@@ -15,19 +15,19 @@ const previewImage = document.getElementById('preview-image');
 const prevImageBtn = document.getElementById('prev-image-btn');
 const nextImageBtn = document.getElementById('next-image-btn');
 
-// Global variables for image navigation
+
 let currentPhotographer;
 let currentImageIndex = 0;
 
 
-// Initialize the page
+
 document.addEventListener('DOMContentLoaded', () => {
 	const contextPath = window.location.pathname.substring(0, 
 		        window.location.pathname.indexOf('/', 2) === -1 ? 
 		        window.location.pathname.length : 
 		        window.location.pathname.indexOf('/', 2));
 
-		    // Fetch photographer data from the servlet with proper context path
+		    // Fetch photographer data from the servlet
 		    fetch(contextPath + '/showPhotographers', {
 				method: 'POST',
 				headers: {
@@ -66,11 +66,11 @@ function listPhotographers(photographers) {
 						username: photographer.username,
 						email: photographer.email,
 				        profileImage: "displayProfilePic?targetName="+photographer.username,
-				        specialty: photographer.skills,
+				        specialty: photographer.originalSkills,
 				        rating: 4.9,
 				        reviewCount: 87,
 				        bio:photographer.description,
-				        location: photographer.address,
+				        location: photographer.originalAddress,
 				        experience: photographer.experience,
 				        pricing: photographer.email,
 				        portfolioImages: [
@@ -107,7 +107,6 @@ function displayPhotographers(photographersArray) {
     }
     
     photographersArray.forEach(photographer => {
-        // Create rating stars
         let starsHTML = '';
         for (let i = 0; i < 5; i++) {
             if (i < Math.floor(photographer.rating)) {
@@ -150,11 +149,10 @@ function displayPhotographers(photographersArray) {
     });
 }
 
-// Set up event listeners
+
 function setupEventListeners(photographers) {
-    // Event delegation for photographer cards
     photographersContainer.addEventListener('click', (e) => {
-        // View details button clicked
+        // View details button
         if (e.target.classList.contains('view-details') || 
             e.target.parentElement.classList.contains('view-details')) {
             const button = e.target.closest('.view-details');
@@ -162,7 +160,7 @@ function setupEventListeners(photographers) {
             openPhotographerDetails(photographerId, photographers);
         }
         
-        // Book now button clicked
+        // Book now button
         if (e.target.classList.contains('book-now-btn') || 
             e.target.parentElement.classList.contains('book-now-btn')) {
             const button = e.target.closest('.book-now-btn');
@@ -170,7 +168,7 @@ function setupEventListeners(photographers) {
             handleBooking(photographerId, photographers);
         }
         
-        // Message button clicked
+        // Message button
         if (e.target.classList.contains('message-btn') || 
             e.target.parentElement.classList.contains('message-btn')) {
             const button = e.target.closest('.message-btn');
@@ -179,23 +177,23 @@ function setupEventListeners(photographers) {
         }
     });
     
-    // Close modals
+    // Close modal
     closeDetailsBtn.addEventListener('click', () => {
         photographerModal.classList.remove('active');
-        enableScrolling(); // Re-enable scrolling when modal closes
+        enableScrolling();
     });
     
     closePreviewBtn.addEventListener('click', () => {
         imagePreviewModal.classList.remove('active');
-        enableScrolling(); // Re-enable scrolling when image preview closes
+        enableScrolling();
     });
     
-    // Book photographer from modal
+    // Modal book button
     bookPhotographerBtn.addEventListener('click', () => {
         handleBooking(currentPhotographer.id, photographers);
     });
     
-    // Message photographer from modal
+    // Modal message button
     messagePhotographerBtn.addEventListener('click', () => {
         handleMessage(currentPhotographer.id, photographers);
     });

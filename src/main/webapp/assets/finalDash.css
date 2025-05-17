@@ -1,0 +1,63 @@
+.profile-section {
+    display: flex;
+    order: 2;
+    gap: 20px;
+    align-items: left;
+    justify-content: space-around;
+}
+
+.profileSum {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: left;
+    justify-content: left;
+    margin-top: 10px;
+}
+
+.profData {
+    color: rgb(218, 218, 218);
+}
+
+.profData h2{
+    margin-bottom: 0;
+}
+
+#profbr {
+    width: 100%;
+    height: 10px;
+    background-color: transparent;
+    border: 0;
+    
+}
+
+.messageSum h4 {
+    color: white;
+}
+
+.fa-envelope {
+    color: white;
+    font-size: 3rem;
+}
+.messageSum {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background: rgba(107, 107, 107, 0.199);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(170, 170, 170, 0.493);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: left;
+    margin-top: 10px;
+}
+
+.hrzBR {
+    width: 2px;
+    background: rgba(141, 141, 141, 0.432);
+    border: 0 solid;
+    border-radius: 10px;
+    content: none;
+}
+    

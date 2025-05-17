@@ -35,10 +35,8 @@ public class UserServlet extends HttpServlet {
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
             
-            // Create validator to check for duplicate values
             UserValidator validator = new UserValidator();
             
-            // Check for duplicate username
             if (validator.isDuplicateUsername(username)) {
                 request.setAttribute("errorMessage", "Username already exists! Please choose a different username.");
             	request.getRequestDispatcher("customer-signup.jsp").forward(request, response);
@@ -46,7 +44,6 @@ public class UserServlet extends HttpServlet {
                 return;
             }
             
-            // Check for duplicate email
             if (validator.isDuplicateEmail(email)) {
                 request.setAttribute("errorMessage", "Email already exists! Please use a different email address.");
                 request.getRequestDispatcher("customer-signup.jsp").forward(request, response);
@@ -55,8 +52,6 @@ public class UserServlet extends HttpServlet {
             }
             
             
-            
-         // Validate email format
             if (!isValidEmail(email)) {
                 request.setAttribute("errorMessage", "Invalid email format! Please enter a valid email address.");
                 request.getRequestDispatcher("customer-signup.jsp").forward(request, response);
@@ -65,8 +60,6 @@ public class UserServlet extends HttpServlet {
             }
 
 
-            
-            // Check for duplicate phone number
             if (validator.isDuplicatePhone(phone)) {
                 request.setAttribute("errorMessage", "Phone number already exists! Please use a different phone number.");
                 request.getRequestDispatcher("customer-signup.jsp").forward(request, response);
@@ -74,7 +67,6 @@ public class UserServlet extends HttpServlet {
                 return;
             }
             
-            // All validations passed, create user
             User user = new User(fullName, username, password, email, gender, address, phone);
             
             try (FileWriter writer = new FileWriter(FILE_PATH, true)) {
@@ -85,20 +77,17 @@ public class UserServlet extends HttpServlet {
             
             String hashedPassword = PasswordUtil.hashPassword(password);
             
-            // Create a new user
+           
             Chat newUser = new Chat();
             newUser.setUsername(username);
             newUser.setPassword(hashedPassword);
             newUser.setEmail(email);
             newUser.setCreatedAt(new Date());
-            
-            // Save the user to database
+
             registerChat.registerUser(newUser);
-            
-            // Redirect to success page
+
             response.sendRedirect("customer-login.jsp");
         } catch (Exception e) {
-            // Forward to error page with error message
            request.setAttribute("errorMessage", "Registration failed: " + e.getMessage());
             request.getRequestDispatcher("customer-signup.jsp").forward(request, response);
            // response.sendRedirect("customer-signup.jsp?type=error&message=" + java.net.URLEncoder.encode("Phone number already exists! Please choose a different phone number.", "UTF-8"));
@@ -110,13 +99,13 @@ public class UserServlet extends HttpServlet {
             return false;
         }
 
-        // Check for @ symbol and proper domain format
+
         int atIndex = email.indexOf('@');
         if (atIndex == -1 || atIndex == 0 || atIndex == email.length() - 1) {
             return false;
         }
 
-        // Check for domain with at least one dot
+
         String domain = email.substring(atIndex + 1);
         return domain.contains(".") && domain.indexOf(".") < domain.length() - 1;
     }

@@ -15,7 +15,7 @@
 
 <%
     Photographer userP = (Photographer) session.getAttribute("photographer");
-    // Check if user is logged in
+
     Chat currentUser = (Chat) session.getAttribute("chat");
     
     MessageDAO messageDAO = new MessageDAO();
@@ -296,12 +296,12 @@
                         </ul>
 
                     <script type="text/javascript">
-                 // This can be added at the bottom of userlist.jsp for real-time unread counts
+                 // Real-time unread counts
                     function updateUnreadCounts() {
                         fetch('getUnreadCounts')
                             .then(response => response.json())
                             .then(data => {
-                                // Update unread badges
+                                // Update unread badge
                                 const userItems = document.querySelectorAll('.user-item');
                                 userItems.forEach(item => {
                                     const userId = item.getAttribute('data-userid');
@@ -325,17 +325,14 @@
                             .catch(error => console.error('Error updating unread counts:', error));
                     }
 
-                    // Update counts every 5 seconds
+                   
                     setInterval(updateUnreadCounts, 5000);
 
-                    // Initial update
+                  
                     document.addEventListener('DOMContentLoaded', updateUnreadCounts);
                     
-                 // Update counts every 5 seconds
-                    setInterval(updateUnreadCounts, 5000);
-
-                    // Initial update
-                    document.addEventListener('DOMContentLoaded', updateUnreadCounts);
+              
+                    
                     </script>
                 </div>
                 <% } else { %>

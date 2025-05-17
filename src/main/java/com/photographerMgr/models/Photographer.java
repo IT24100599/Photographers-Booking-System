@@ -11,12 +11,15 @@ public class Photographer {
     private String skills;
     private String description;
     private String experience;
+    @SuppressWarnings("unused")
+	private String originalAddress;
+    @SuppressWarnings("unused")
+	private String originalSkills;
+    private Double ratings;
     
-    public Photographer() {
-		this.gender = "Hidden";
-		this.address = "Null";
-		this.phone = "Null";
-		this.skills = "Null";
+    public Photographer(String username, Double ratings) {
+    	this.username = username;
+    	this.ratings = ratings;
     }
 
     public Photographer(String username, String password, String email, String gender, String address, String phone, String skills, String fName) {
@@ -25,14 +28,15 @@ public class Photographer {
         this.email = email;
         this.fullName = fName;
         this.gender = gender;
-        setAddress(address); // Using setter to validate/transform address
+        setAddress(address);
         this.phone = phone;
         setSkills(skills);
         this.description = "N/A";
         this.experience = "N/A";
+        this.originalAddress = getOriginalAddress();
+        this.originalSkills = getOriginalSkills();
     }
 
-    
     public String getDefaultProfilePic() {
 		 if (gender!="Hidden") {
 			return gender.toLowerCase() + ".gif";
@@ -41,7 +45,6 @@ public class Photographer {
 		}
 	}
     
-    // Getters and setters
     public String getUsername() {
         return username;
     }
@@ -78,23 +81,14 @@ public class Photographer {
         return address;
     }
 
-    /**
-     * Sets the address after validating and replacing commas with @;%
-     * @param address the address to set
-     */
     public void setAddress(String address) {
         if (address != null) {
-            // Replace all commas with "@;%"
             this.address = address.replace(",", "@;%");
         } else {
             this.address = "";
         }
     }
     
-    /**
-     * Returns the original address with commas restored
-     * @return address with original commas
-     */
     public String getOriginalAddress() {
         if (address != null) {
             return address.replace("@;%", ",");
@@ -112,7 +106,6 @@ public class Photographer {
     
     public void setSkills(String skills) {
     	if (skills != null) {
-            // Replace all commas with "@;%"
             this.skills = skills.replace(",", "@;%");
         } else {
             this.skills = "";
@@ -122,7 +115,7 @@ public class Photographer {
     public String getSkills() {
     	return skills;
     }
-    
+
     public String getOriginalSkills() {
         if (skills != null) {
             return skills.replace("@;%", ",");
@@ -153,6 +146,14 @@ public class Photographer {
     
     public String getDescription() {
 		return description;
+	}
+    
+    public Double getRatings() {
+    	return ratings;
+    }
+    
+    public void setRatings(Double ratings) {
+		this.ratings = ratings;
 	}
    
 

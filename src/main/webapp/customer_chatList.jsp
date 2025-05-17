@@ -15,7 +15,7 @@
 
 <%
 	User userC = (User) session.getAttribute("user");
-    // Check if user is logged in
+
     Chat currentUser = (Chat) session.getAttribute("chat");
     
     MessageDAO messageDAO = new MessageDAO();
@@ -181,12 +181,12 @@
         <div class="sidebar glass-card">
             <h2 class="logo"><i class="fas fa-key"></i>Brand</h2>
             <ul class="nav-links">
-                <li><a href="#"><i class="fas fa-building"></i> Dashboard</a></li>
+                <li><a href="customer-dashboard.jsp"><i class="fas fa-building"></i> Dashboard</a></li>
                 <li><a href="#"><i class="fas fa-calendar"></i> My Bookings</a></li>
                 <li><a href="findPhotographers.jsp"><i class="fas fa-camera"></i> Find Photographers</a></li>
                 <li class="active"><a><i class="fas fa-comments"></i> Messages</a></li>
                 <li><a href="customer.jsp"><i class="fas fa-user"></i> My Profile</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="customer-settings.jsp"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
             <div class="sidebar-footer">
                 <a href="logoutCustomer.jsp" class="logout-btn btn-animated"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -296,7 +296,7 @@
         		<% } %>
             </div>
         </div>
-    </div>
+        </div>
 
     <script src="assets/main.js"></script>
     <script src="assets/customer-dashboard.js"></script>

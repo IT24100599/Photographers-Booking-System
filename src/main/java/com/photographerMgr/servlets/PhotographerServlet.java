@@ -33,11 +33,10 @@ public class PhotographerServlet extends HttpServlet {
             String phone = request.getParameter("phone");
             String skills = request.getParameter("skills");
             
-                        
-            // Create validator to check for duplicate values
+
             PhotographerValidator validator = new PhotographerValidator();
             
-            // Check for duplicate username
+
             if (validator.isDuplicateUsername(username)) {
                 request.setAttribute("errorMessage", "Username already exists! Please choose a different username.");
                 request.getRequestDispatcher("photographer-signup.jsp").forward(request, response);
@@ -45,7 +44,6 @@ public class PhotographerServlet extends HttpServlet {
                 return;
             }
             
-            // Check for duplicate email
             if (validator.isDuplicateEmail(email)) {
                 request.setAttribute("errorMessage", "Email already exists! Please use a different email address.");
                 request.getRequestDispatcher("photographer-signup.jsp").forward(request, response);
@@ -53,7 +51,6 @@ public class PhotographerServlet extends HttpServlet {
                 return;
             }
             
-            // Check for duplicate phone number
             if (validator.isDuplicatePhone(phone)) {
                 request.setAttribute("errorMessage", "Phone number already exists! Please use a different phone number.");
                 request.getRequestDispatcher("photographer-signup.jsp").forward(request, response);
@@ -61,12 +58,11 @@ public class PhotographerServlet extends HttpServlet {
                 return;
             }
             
-            // All validations passed, create user
             Photographer photographer = new Photographer(username, password, email, gender, address, phone, skills, fullName);
             
             String defaults = photographer.getExperience()+", "+photographer.getDescription();
             
-           //Create a new directory for uploads
+
             try {
 				File uploadDir = new File(UPLOAD_DIRECTORY + username);
 				if (!uploadDir.exists()) {
@@ -87,20 +83,16 @@ public class PhotographerServlet extends HttpServlet {
             
             String hashedPassword = PasswordUtil.hashPassword(password);
             
-            // Create a new user
             Chat newUser = new Chat();
             newUser.setUsername(username);
             newUser.setPassword(hashedPassword);
             newUser.setEmail(email);
             newUser.setCreatedAt(new Date());
             
-            // Save the user to database
+
             registerChat.registerUser(newUser);
-            
-            // Redirect to success page
             response.sendRedirect("photographer-login.jsp");
         } catch (Exception e) {
-            // Forward to error page with error message
             request.setAttribute("errorMessage", "Registration failed: " + e.getMessage());
             request.getRequestDispatcher("photographer-signup.jsp").forward(request, response);
            // response.sendRedirect("photographer-signup.jsp?type=error&message=" + java.net.URLEncoder.encode("Phone number already exists! Please choose a different phone number.", "UTF-8"));

@@ -16,7 +16,6 @@ public class ProfileDisplayServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        // Get username parameter
         String username = request.getParameter("targetName");
         
         if (username == null || username.trim().isEmpty()) {
@@ -25,14 +24,13 @@ public class ProfileDisplayServlet extends HttpServlet {
             return;
         }
         
-        // Sanitize username to remove any characters that might cause directory traversal
         username = username.replaceAll("[^a-zA-Z0-9]", "_");
         
-        // Create the file path
+        
         String uploadPath = UPLOAD_DIR + username+"\\";
         
-        // Find a profile picture file (looking for common image extensions)
         File dir = new File(uploadPath);
+        
         
         
         
@@ -56,14 +54,13 @@ public class ProfileDisplayServlet extends HttpServlet {
         
         System.out.println("Profile picture path: " + uploadPath);
         
-        // If no profile picture found, use default
         if (profilePic == null) {
             profilePic = new File(DEFAULT_PROFILE);
         }
         
-        // Set content type based on file extension
+
         String fileName = profilePic.getName();
-        String contentType = "image/jpeg"; // Default
+        String contentType = "image/jpeg"; 
         
         if (fileName.endsWith(".png")) {
             contentType = "image/png";
@@ -75,7 +72,6 @@ public class ProfileDisplayServlet extends HttpServlet {
         
         response.setContentType(contentType);
         
-        // Stream the file to the response
         try (FileInputStream in = new FileInputStream(profilePic);
              OutputStream out = response.getOutputStream()) {
             

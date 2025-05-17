@@ -21,16 +21,15 @@
         <div class="sidebar glass-card">
             <h2 class="logo"><i class="fas fa-key"></i>Brand</h2>
             <ul class="nav-links">
-            	<li><a href="#"><i class="fas fa-building"></i> Dashboard</a></li>
-                <li><a href="#l"><i class="fas fa-calendar"></i> My Bookings</a></li>
+            	<li><a href="customer-dashboard.jsp"><i class="fas fa-building"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-calendar"></i> My Bookings</a></li>
                 <li class="active"><a href="#"><i class="fas fa-camera"></i> Find Photographers</a></li>
-                <li><a href="#"><i class="fas fa-heart"></i> Favorites</a></li>
                 <li><a href="customer_chatList.jsp"><i class="fas fa-comments"></i> Messages</a></li>
                 <li><a href="customer.jsp"><i class="fas fa-user"></i> My Profile</a></li>
                 <li><a href="customer-settings.jsp"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
             <div class="sidebar-footer">
-                <a href="logout.jsp" class="logout-btn btn-animated"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="logoutCustomer.jsp" class="logout-btn btn-animated"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
         </div>
         
@@ -82,10 +81,10 @@
                 </div>
                 
                 <div class="photographers-grid" id="photographers-container">
-                    <!-- Photographer cards will be inserted here by JavaScript -->
+
                 </div>
                 
-                <!-- Photographer Details Modal - Moved inside content-section -->
+
                 <div class="modal" id="photographer-details-modal">
                     <div class="modal-content glass-card wide-modal">
                         <div class="modal-header">

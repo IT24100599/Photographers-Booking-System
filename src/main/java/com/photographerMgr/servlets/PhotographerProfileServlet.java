@@ -38,10 +38,9 @@ public class PhotographerProfileServlet extends HttpServlet {
         String description = request.getParameter("description");
         String experience = request.getParameter("experience");
         
-        // Create a UserValidator to check for duplicates
         PhotographerValidator validator = new PhotographerValidator();
         
-        // Validate username
+
         if (!username.equals(originalUsername)) {
             if (validator.isDuplicateUsername(username)) {
                 request.setAttribute("error", "Username already exists! Please choose a different username.");
@@ -49,8 +48,6 @@ public class PhotographerProfileServlet extends HttpServlet {
                 return;
             }
         }
-        
-        // Validate email
         if (!email.equals(originalEmail)) {
             if (validator.isDuplicateEmail(email)) {
                 request.setAttribute("error", "Email already exists! Please use a different email address.");
@@ -59,7 +56,6 @@ public class PhotographerProfileServlet extends HttpServlet {
             }
         }
         
-        // Validate phone
         if (!phone.equals(originalPhone)) {
             if (validator.isDuplicatePhone(phone)) {
                 request.setAttribute("error", "Phone number already exists! Please use a different phone number.");
@@ -76,7 +72,6 @@ public class PhotographerProfileServlet extends HttpServlet {
         boolean success = profileManager.updatePhotographerProfile(originalUsername, originalEmail, updatedPhotographer, experience, description);
         
         if (success) {
-            // Update the session with the new user data
             session.setAttribute("photographer", updatedPhotographer);
             request.setAttribute("message", "Profile updated successfully!");
         } else {

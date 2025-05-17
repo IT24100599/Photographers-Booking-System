@@ -31,7 +31,6 @@ public class DeleteServlet extends HttpServlet {
         System.out.println("CU: "+currentUser.getUsername());
      
         
-        // Validate that the username from the form matches the logged-in user
         if (!currentUser.getUsername().equals(username)) {
             request.setAttribute("error", "Failed to delete user profile : Invalid user verification.");
             request.getRequestDispatcher("customer.jsp").forward(request, response);
@@ -40,7 +39,6 @@ public class DeleteServlet extends HttpServlet {
         
         UserDAO userDAO = new UserDAO();
         
-        // Delete the user profile
         UserDeletionManager deletionManager = new UserDeletionManager();
         boolean userDel = deletionManager.deleteUserProfile(username);
         boolean chatDel = userDAO.deleteUserByUsername(username);
@@ -48,19 +46,15 @@ public class DeleteServlet extends HttpServlet {
         boolean success = userDel && chatDel;
         
         if (success) {
-            // Invalidate session and redirect to a confirmation page
             session.invalidate();
             response.sendRedirect("index.jsp");
         } else if (!userDel && chatDel) {
-			// Redirect to error page
 			request.setAttribute("error", "User deleted from chat but failed to delete user profile from database. Please try again.");
 			request.getRequestDispatcher("customer.jsp").forward(request, response);
 		} else if (!chatDel && userDel) {
-			// Redirect to error page
 			request.setAttribute("error", "User deleted from database but failed to delete user from chat. Please contact support.");
 			request.getRequestDispatcher("customer.jsp").forward(request, response);
     	} else {
-            // Redirect to error page
             request.setAttribute("error", "Failed to delete user profile. Try again or contact support.");
             request.getRequestDispatcher("customer.jsp").forward(request, response);
         }

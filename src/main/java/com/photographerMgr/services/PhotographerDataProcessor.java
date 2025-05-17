@@ -12,13 +12,6 @@ import com.photographerMgr.models.Photographer;
 public class PhotographerDataProcessor {
     private static final String FILE_PATH = "C:\\Users\\savir\\Documents\\Java projects\\photoWeb\\src\\main\\webapp\\WEB-INF\\photographers.txt";
 
-    /**
-     * Authenticates a user based on username/email and password
-     * 
-     * @param userIdentifier username or email
-     * @param password user's password
-     * @return Photographer object if authenticated, null otherwise
-     */
     public Photographer authenticateUser(String userIdentifier, String password) {
         List<Photographer> photographers = loadPhotographersFromFile();
         
@@ -31,14 +24,9 @@ public class PhotographerDataProcessor {
             }
         }
 
-        return null; // User not found or credentials don't match
+        return null;
     }
 
-    /**
-     * Loads all photographers from photographers.txt file
-     * 
-     * @return List of Photographer objects
-     */
     private List<Photographer> loadPhotographersFromFile() {
         List<Photographer> photographers = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -71,14 +59,6 @@ public class PhotographerDataProcessor {
         return photographers;
     }
 
-    /**
-     * Checks if a photographer matches the provided credentials
-     * 
-     * @param photographer Photographer object
-     * @param userIdentifier username or email
-     * @param password photographer's password
-     * @return true if matching, false otherwise
-     */
     private boolean isMatchingUser(Photographer photographer, String userIdentifier, String password) {
         return (photographer.getUsername().equals(userIdentifier) || 
                 photographer.getEmail().equals(userIdentifier)) && 

@@ -29,17 +29,22 @@ public class PhotographerLoginServlet extends HttpServlet {
         Chat client = userDAO.getUserByUsername(userIdentifier);
 
         UserStatusDAO statusDAO = new UserStatusDAO();
-        statusDAO.updateUserStatus(client.getId(), "online");
         
         if (photographer != null) {
-            // Successful login
+        	try {
+        		statusDAO.updateUserStatus(client.getId(), "online");
+        	} catch (Exception e) {
+        		request.setAttribute("error", "Database offline. Please try again later.");
+                request.getRequestDispatcher("photographer-login.jsp").forward(request, response);
+                return;
+        	}
+
             HttpSession session = request.getSession();
             session.setAttribute("photographer", photographer);
             session.setAttribute("chat", client);
             
             response.sendRedirect("photographer.jsp");
         } else {
-            // Failed login
             request.setAttribute("error", "Invalid username/email or password");
             request.getRequestDispatcher("photographer-login.jsp").forward(request, response);
         }

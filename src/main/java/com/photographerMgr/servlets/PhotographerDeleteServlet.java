@@ -28,7 +28,6 @@ public class PhotographerDeleteServlet extends HttpServlet {
         
         String username = request.getParameter("originalUsername");
         
-        // Validate that the username from the form matches the logged-in user
         if (!currentPhotographer.getUsername().equals(username)) {
             request.setAttribute("error", "Invalid user verification.");
             request.getRequestDispatcher("photographer.jsp").forward(request, response);
@@ -37,11 +36,11 @@ public class PhotographerDeleteServlet extends HttpServlet {
         
         UserDAO userDAO = new UserDAO();
         
-        // Delete the user profile
         PhotographerDeletionManager deletionManager = new PhotographerDeletionManager();
+        
         boolean userDel = deletionManager.deletePhotographerProfile(username);
         
-        // Delete the user's upload directory
+
         String userUploadDirectory = UPLOAD_DIRECTORY + username;
         
         try {
@@ -61,19 +60,15 @@ public class PhotographerDeleteServlet extends HttpServlet {
         boolean success = userDel && chatDel;
         
         if (success) {
-            // Invalidate session and redirect to a confirmation page
             session.invalidate();
             response.sendRedirect("index.jsp");
         } else if (!userDel && chatDel) {
-			// Redirect to error page
 			request.setAttribute("error", "User deleted from chat but failed to delete user profile from database. Please try again.");
 			request.getRequestDispatcher("customer.jsp").forward(request, response);
 		} else if (!chatDel && userDel) {
-			// Redirect to error page
 			request.setAttribute("error", "User deleted from database but failed to delete user from chat. Please contact support.");
 			request.getRequestDispatcher("customer.jsp").forward(request, response);
     	} else {
-            // Redirect to error page
             request.setAttribute("error", "Failed to delete user profile. Try again or contact support.");
             request.getRequestDispatcher("customer.jsp").forward(request, response);
         }
