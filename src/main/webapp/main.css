@@ -1,0 +1,136 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment - Photography Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="main.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+ .error-message { color: #ff6b6b; margin-top: 10px; text-align: center; }
+.payment-proof { display: none; background: #e6ffe6; color: #222; border-radius: 10px; padding: 20px; margin-top: 20px; text-align: center; }
+.proof-btn { display: none; margin: 15px auto 0 auto; }
+.proof-img { display: none; margin: 15px auto 0 auto; border: 1px solid #ccc; border-radius: 8px; }
+</style>
+</head>
+<body>
+<div class="background"></div>
+<div class="container">
+<div class="content">
+<div class="Pixora">
+<i class="fas fa-camera"></i>
+<h2>Brand</h2>
+</div>
+<div class="text-sci">
+<h2>Complete Payment<br><span>Secure Transaction</span></h2>
+<p>Please enter your payment details to confirm your booking</p>
+<div class="payment-details">
+<ul>
+<li><span>Package:</span> <span>Professional Photography</span></li>
+<li><span>Duration:</span> <span>2 Hours</span></li>
+<li><span>Location:</span> <span>Studio Session</span></li>
+<li><span>Amount:</span> <span>$299</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="logreg-box">
+<div class="form-box">
+<h2>Payment Details</h2>
+<form id="paymentForm" action="payment" method="post" autocomplete="off">
+<div class="input-box">
+<input type="text" id="name" name="name" required>
+<label>Card Holder Name</label>
+<i class="fas fa-user icon"></i>
+</div>
+<div class="input-box">
+<input type="text" id="cardNumber" name="cardNumber" maxlength="16" required>
+<label>Card Number</label>
+<i class="fas fa-credit-card icon"></i>
+</div>
+<div class="input-box">
+<input type="text" id="expiry" name="expiry" maxlength="5" required>
+<label>Expiry Date (MM/YY)</label>
+<i class="fas fa-calendar icon"></i>
+</div>
+<div class="input-box">
+<input type="text" id="cvv" name="cvv" maxlength="4" required>
+<label>CVV</label>
+<i class="fas fa-lock icon"></i>
+</div>
+<button type="submit" class="btn">Process Payment</button>
+<div class="error-message" id="error"></div>
+<div class="back-link">
+<a href="index.jsp"><i class="fas fa-arrow-left"></i> Back to Home</a>
+</div>
+</form>
+<div class="payment-proof" id="paymentProof">
+<h3>Payment Successful!</h3>
+<p id="proofName"></p>
+<p id="proofCard"></p>
+<p>Amount: $299</p>
+<p id="proofTxn"></p>
+</div>
+<button class="btn proof-btn" id="generateProofBtn" onclick="generateProof()">Generate Payment Proof Image</button>
+<img id="proofImage" class="proof-img"/>
+</div>
+</div>
+</div>
+<script>
+ document.getElementById('paymentForm').onsubmit = function(e) {
+e.preventDefault();
+    let card = document.getElementById('cardNumber').value.trim();
+    let expiry = document.getElementById('expiry').value.trim();
+    let cvv = document.getElementById('cvv').value.trim();
+    let name = document.getElementById('name').value.trim();
+    let error = "";
+
+// Card number validation (16 digits)
+if (!/^\d{16}$/.test(card)) error += "Please enter a valid 16-digit card number.<br>";
+
+// Expiry validation (MM/YY and not in the past)
+if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+    error += "Please enter a valid expiry date in MM/YY format.<br>";
+} else {
+      let [mm, yy] = expiry.split('/').map(Number);
+      let now = new Date();
+      let expDate = new Date(2000 + yy, mm - 1);
+      if (mm < 1 || mm > 12) {
+      error += "Please enter a valid expiration month (01-12).<br>";
+  } else if (expDate < new Date(now.getFullYear(), now.getMonth())) {
+      error += "Card has expired.<br>";
+  }
+  }
+
+// CVV validation (3 or 4 digits)
+if (!/^\d{3,4}$/.test(cvv)) error += "Please enter a valid 3 or 4 digit CVV.<br>";
+
+// Name validation
+if (name === "") error += "Please enter the card holder's name.<br>";
+
+document.getElementById('error').innerHTML = error;
+    if (!error) {
+// Show payment proof section
+document.getElementById('paymentProof').style.display = 'block';
+document.getElementById('proofName').innerText = "Name: " + name;
+document.getElementById('proofCard').innerText = "Card: **** **** **** " + card.slice(-4);
+document.getElementById('proofTxn').innerText = "Transaction ID: " + Math.floor(Math.random()*1000000);
+document.getElementById('generateProofBtn').style.display = 'block';
+document.getElementById('proofImage').style.display = 'none';
+} else {
+      document.getElementById('paymentProof').style.display = 'none';
+      document.getElementById('generateProofBtn').style.display = 'none';
+      document.getElementById('proofImage').style.display = 'none';
+  }
+};
+
+function generateProof() {
+html2canvas(document.getElementById('paymentProof')).then(function(canvas) {
+document.getElementById('proofImage').src = canvas.toDataURL();
+document.getElementById('proofImage').style.display = 'block';
+});
+}
+</script>
+</body>
+</html>
