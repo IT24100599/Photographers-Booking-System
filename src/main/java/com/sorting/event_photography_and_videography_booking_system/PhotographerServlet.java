@@ -27,27 +27,15 @@ public class PhotographerServlet extends HttpServlet {
         String sortBy = request.getParameter("sortBy"); // "rating" or "price"
         String order = request.getParameter("order");   // "asc" or "desc"
 
-        if (sortBy != null) {
-            Comparator<Photographer> comparator = null;
+        boolean ascending = "asc".equalsIgnoreCase(order);
 
-            if ("rating".equalsIgnoreCase(sortBy)) {
-                comparator = Comparator.comparingDouble(Photographer::getRating);
-            } else if ("price".equalsIgnoreCase(sortBy)) {
-                comparator = Comparator.comparingDouble(Photographer::getPrice);
-            }
-
-            if (comparator != null) {
-                if ("desc".equalsIgnoreCase(order)) {
-                    comparator = comparator.reversed(); // Reverse order for descending sort
-                }
-                photographers.sort(comparator);
-            }
+        if ("rating".equalsIgnoreCase(sortBy)) {
+            photographers = photographerService.sortByRating(photographers, ascending);
+        } else if ("price".equalsIgnoreCase(sortBy)) {
+            photographers = photographerService.sortByPrice(photographers, ascending);
         }
 
-        // Set the list in request attribute
         request.setAttribute("photographers", photographers);
-
-        // Forward to JSP page
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

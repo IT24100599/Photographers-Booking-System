@@ -23,19 +23,46 @@
             }
             sortedRows.forEach(row => tbody.appendChild(row));
         }
+
     </script>
 </head>
-<body class="container mt-4">
+<body id="pageBody" class="container mt-4">
 
 <h2 class="mb-3">Photographers</h2>
 
 <!-- Sorting & Filtering Options -->
 <div class="d-flex justify-content-between mb-3">
     <!-- Sorting -->
-    <div>
-        <button class="btn btn-secondary" onclick="sortTable(1)">Sort by Rating</button>
-        <button class="btn btn-secondary" onclick="sortTable(2)">Sort by Price</button>
+    <%
+        String selectedEventType = request.getParameter("eventType");
+        String sortBy = request.getParameter("sortBy");
+        String order = request.getParameter("order");
+
+        String eventTypeParam = (selectedEventType != null && !selectedEventType.isEmpty())
+                ? "&eventType=" + selectedEventType
+                : "";
+    %>
+
+    <div class="mb-3 d-flex gap-2">
+        <!-- Sort by Rating -->
+        <div class="btn-group">
+            <span class="btn btn-secondary disabled">Sort by Rating</span>
+            <a href="photographers?sortBy=rating&order=asc<%= eventTypeParam %>"
+               class="btn btn-outline-secondary <%= ("rating".equals(sortBy) && "asc".equals(order)) ? "active" : "" %>">↑</a>
+            <a href="photographers?sortBy=rating&order=desc<%= eventTypeParam %>"
+               class="btn btn-outline-secondary <%= ("rating".equals(sortBy) && "desc".equals(order)) ? "active" : "" %>">↓</a>
+        </div>
+
+        <!-- Sort by Price -->
+        <div class="btn-group">
+            <span class="btn btn-secondary disabled">Sort by Price</span>
+            <a href="photographers?sortBy=price&order=asc<%= eventTypeParam %>"
+               class="btn btn-outline-secondary <%= ("price".equals(sortBy) && "asc".equals(order)) ? "active" : "" %>">↑</a>
+            <a href="photographers?sortBy=price&order=desc<%= eventTypeParam %>"
+               class="btn btn-outline-secondary <%= ("price".equals(sortBy) && "desc".equals(order)) ? "active" : "" %>">↓</a>
+        </div>
     </div>
+
 
     <!-- Filtering -->
     <label for="eventType">Filter by Event Type:</label>
@@ -64,6 +91,7 @@
         <th onclick="sortTable(1)" style="cursor:pointer;">Rating </th>
         <th onclick="sortTable(2)" style="cursor:pointer;">Price ($) </th>
         <th>Event Type</th>
+        <th>Action</th> <!-- New Column -->
     </tr>
     </thead>
     <tbody>
@@ -77,6 +105,10 @@
         <td><%= p.getRating() %></td>
         <td><%= p.getPrice() %></td>
         <td><%= p.getEventType() %></td>
+        <td>
+            <!-- Message button passes photographer name as a GET parameter -->
+            <a href="message.jsp?name=<%= java.net.URLEncoder.encode(p.getName(), "UTF-8") %>" class="btn btn-primary btn-sm">Message</a>
+        </td>
     </tr>
     <%
         }

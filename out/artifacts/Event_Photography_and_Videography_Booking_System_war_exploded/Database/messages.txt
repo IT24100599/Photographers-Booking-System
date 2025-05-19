@@ -1,0 +1,20 @@
+Photographer: John Doe
+From: Malki 
+Message: ....
+----------
+Photographer: John Doe
+From: Malki 
+Message: ...
+----------
+Photographer: Emily Davis
+From: yasara
+Message: ;;;;;
+----------
+Photographer: Jane Smith
+From: Malki Yasara
+Message: .....
+----------
+Photographer: John Doe
+From: Udara
+Message: .........
+----------

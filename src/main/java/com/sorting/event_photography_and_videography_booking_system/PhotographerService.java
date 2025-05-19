@@ -31,12 +31,12 @@ public class PhotographerService {
     }
 
     // Bubble Sort photographers by rating
-    public List<Photographer> sortByRating(List<Photographer> photographers) {
+    public List<Photographer> sortByRating(List<Photographer> photographers, boolean ascending) {
         int n = photographers.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                if (photographers.get(j).getRating() < photographers.get(j + 1).getRating()) {
-                    // Swap
+                if ((ascending && photographers.get(j).getRating() > photographers.get(j + 1).getRating()) ||
+                        (!ascending && photographers.get(j).getRating() < photographers.get(j + 1).getRating())) {
                     Photographer temp = photographers.get(j);
                     photographers.set(j, photographers.get(j + 1));
                     photographers.set(j + 1, temp);
@@ -45,6 +45,7 @@ public class PhotographerService {
         }
         return photographers;
     }
+
     public List<Photographer> sortByPrice(List<Photographer> photographers, boolean ascending) {
         int n = photographers.size();
         for (int i = 0; i < n - 1; i++) {

@@ -1,0 +1,222 @@
+/* Body and Background */
+body {
+    /* Background photo with black transparent gradient overlay */
+    background-image:
+            linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(64,64,64,0.7) 99%, rgba(64,64,64,0.7) 100%),
+            url('../images/background.jpg'); /* Adjust path */
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    transition: background 0.5s ease;
+}
+
+/* Heading */
+h2 {
+    color: #333333; /* dark gray */
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(51, 51, 51, 0.7);
+    transition: color 0.3s ease;
+}
+
+h2:hover {
+    color: #050505; /* lighter gray */
+}
+
+/* Container for sorting/filtering */
+.d-flex.justify-content-between.mb-3 {
+    background: #e6e6e6; /* light gray */
+    border-radius: 15px;
+    padding: 20px 25px;
+    box-shadow: 0 8px 20px rgba(51, 51, 51, 0.25);
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.d-flex.justify-content-between.mb-3:hover {
+    box-shadow: 0 12px 30px rgba(51, 51, 51, 0.4);
+}
+
+/* Buttons */
+.btn-secondary {
+    background: linear-gradient(45deg, #333333, #666666);
+    border: none !important;
+    color: #fff !important;
+    font-weight: 700;
+    border-radius: 50px;
+    padding: 12px 28px;
+    box-shadow: 0 6px 15px rgba(51, 51, 51, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-secondary::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.15);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.btn-secondary:hover::before {
+    opacity: 1;
+    top: 0;
+    left: 0;
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+    background: linear-gradient(45deg, #666666, #333333);
+    box-shadow: 0 8px 25px rgba(51, 51, 51, 0.6);
+    transform: scale(1.05);
+    color: #fff !important;
+    outline: none;
+}
+
+/* Label */
+label[for="eventType"] {
+    font-weight: 700;
+    color: #333333;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+label[for="eventType"]:hover {
+    color: #555555;
+}
+
+/* Dropdown */
+.form-select {
+    width: 220px;
+    border-radius: 12px;
+    border: 2px solid #333333;
+    padding: 10px 16px;
+    background: #f7f7f7;
+    color: #333333;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+}
+
+.form-select:hover {
+    background: #e0e0e0;
+}
+
+.form-select:focus {
+    border-color: #666666;
+    box-shadow: 0 0 0 0.3rem rgba(102, 102, 102, 0.4);
+    outline: none;
+    background: #d9d9d9;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+    background: transparent;
+    transition: box-shadow 0.3s ease;
+}
+
+.table thead tr {
+    background: linear-gradient(90deg, #333333, #666666);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    border-radius: 12px;
+}
+
+.table th, .table td {
+    padding: 14px 20px;
+    text-align: center;
+    vertical-align: middle;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(51, 51, 51, 0.15);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* Remove default table borders */
+.table th {
+    border: none;
+}
+
+.table tbody tr {
+    background: transparent;
+    transition: transform 0.3s ease;
+}
+
+.table tbody tr:hover td {
+    background-color: #f0f0f0;
+    box-shadow: 0 6px 18px rgba(51, 51, 51, 0.3);
+    cursor: pointer;
+    transform: translateY(-3px);
+}
+
+/* Sortable headers */
+th[onclick] {
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: color 0.3s ease;
+}
+
+th[onclick]:after {
+    content: "⇅";
+    font-size: 0.7rem;
+    color: #333333;
+    margin-left: 6px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.3s ease;
+    display: inline-block;
+    transform-origin: center;
+}
+
+th[onclick]:hover {
+    color: #555555;
+}
+
+th[onclick]:hover:after {
+    opacity: 1;
+    transform: rotate(20deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .d-flex.justify-content-between.mb-3 {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+    .form-select, .btn-secondary {
+        width: 100%;
+        max-width: 320px;
+    }
+    .table th, .table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
+
