@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: DELL
+Build-Jdk: Oracle OpenJDK 23.0.1
+
