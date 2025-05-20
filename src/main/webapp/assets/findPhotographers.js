@@ -7,8 +7,7 @@ const closeDetailsBtn = document.getElementById('close-details-modal');
 const bookPhotographerBtn = document.getElementById('book-photographer-btn');
 const messagePhotographerBtn = document.getElementById('message-photographer-btn');
 const photographerSearch = document.getElementById('photographer-search');
-const specialtyFilter = document.getElementById('specialty-filter');
-const ratingFilter = document.getElementById('rating-filter');
+const ratingFilter = document.getElementById('filter-by');
 const imagePreviewModal = document.getElementById('image-preview-modal');
 const closePreviewBtn = document.getElementById('close-preview-modal');
 const previewImage = document.getElementById('preview-image');
@@ -28,30 +27,49 @@ document.addEventListener('DOMContentLoaded', () => {
 		        window.location.pathname.indexOf('/', 2));
 
 		    // Fetch photographer data from the servlet
-		    fetch(contextPath + '/showPhotographers', {
-				method: 'POST',
-				headers: {
-					 'Content-Type': 'application/json'
-				}
-		    })
-		    .then(response => {
-		        if (!response.ok) {
-		            throw new Error('Network response was not ok: ' + response.statusText);
-		        }
-		        return response.json();
-		    })
-		    .then(data => {
-				const photographers = listPhotographers(data);
-		       displayPhotographers(photographers);
-			   setupEventListeners(photographers);
-		    })
-		    .catch(error => {
-		        console.error('Error fetching photographers:', error);
-		    });
-    
+		    fetchData("default");
    
 });
 
+ratingFilter.addEventListener('change', () => {
+	const slectedRating = ratingFilter.value;
+	fetchData(slectedRating);
+});
+	
+
+
+function fetchData(filter) {
+    const contextPath = window.location.pathname.substring(0, 
+        window.location.pathname.indexOf('/', 2) === -1 ? 
+        window.location.pathname.length : 
+        window.location.pathname.indexOf('/', 2));
+		
+	const requestData = {
+		rating: filter
+	};
+        
+    fetch(contextPath + '/showPhotographers', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+		body: JSON.stringify(requestData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        const photographers = listPhotographers(data);
+        displayPhotographers(photographers);
+        setupEventListeners(photographers);
+    })
+    .catch(error => {
+        console.error('Error fetching photographers:', error);
+    });
+}
 
 function listPhotographers(photographers) {
 	const photographersList = [];
@@ -67,8 +85,8 @@ function listPhotographers(photographers) {
 						email: photographer.email,
 				        profileImage: "displayProfilePic?targetName="+photographer.username,
 				        specialty: photographer.originalSkills,
-				        rating: 4.9,
-				        reviewCount: 87,
+				        rating: photographer.ratings,
+				        reviewCount: photographer.ratings,
 				        bio:photographer.description,
 				        location: photographer.originalAddress,
 				        experience: photographer.experience,
@@ -155,9 +173,7 @@ function setupEventListeners(photographers) {
         // View details button
         if (e.target.classList.contains('view-details') || 
             e.target.parentElement.classList.contains('view-details')) {
-            const button = e.target.closest('.view-details');
-            const photographerId = parseInt(button.dataset.id);
-            openPhotographerDetails(photographerId, photographers);
+            window.location.href="PhotographerData?targetName="+photographers[e.target.dataset.id-1].username;
         }
         
         // Book now button
@@ -178,46 +194,13 @@ function setupEventListeners(photographers) {
     });
     
     // Close modal
-    closeDetailsBtn.addEventListener('click', () => {
-        photographerModal.classList.remove('active');
-        enableScrolling();
-    });
-    
-    closePreviewBtn.addEventListener('click', () => {
-        imagePreviewModal.classList.remove('active');
-        enableScrolling();
-    });
-    
-    // Modal book button
-    bookPhotographerBtn.addEventListener('click', () => {
-        handleBooking(currentPhotographer.id, photographers);
-    });
-    
-    // Modal message button
-    messagePhotographerBtn.addEventListener('click', () => {
-        handleMessage(currentPhotographer.id, photographers);
-    });
     
     // Search and filter
     photographerSearch.addEventListener('input', filterPhotographers(photographers));
     specialtyFilter.addEventListener('change', filterPhotographers(photographers));
     ratingFilter.addEventListener('change', filterPhotographers(photographers));
     
-    // Image navigation
-    prevImageBtn.addEventListener('click', showPreviousImage);
-    nextImageBtn.addEventListener('click', showNextImage);
-    
-    // Close modals when clicking outside
-    window.addEventListener('click', (e) => {
-        if (e.target === photographerModal) {
-            photographerModal.classList.remove('active');
-            enableScrolling(); // Re-enable scrolling when modal closes
-        }
-        if (e.target === imagePreviewModal) {
-            imagePreviewModal.classList.remove('active');
-            enableScrolling(); // Re-enable scrolling when image preview closes
-        }
-    });
+   
 }
 
 // Open photographer details modal

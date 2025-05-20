@@ -35,6 +35,7 @@ public class Photographer {
         this.experience = "N/A";
         this.originalAddress = getOriginalAddress();
         this.originalSkills = getOriginalSkills();
+        this.ratings = 0.0;
     }
 
     public String getDefaultProfilePic() {

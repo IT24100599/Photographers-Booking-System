@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import java.io.BufferedReader;
+import com.google.gson.JsonObject;
 
 @WebServlet(urlPatterns = {"/showPhotographers"})
 public class ShowPhotographersServlet extends HttpServlet {
@@ -19,16 +21,32 @@ public class ShowPhotographersServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
 		try {
+			BufferedReader reader = request.getReader();
+	        StringBuilder buffer = new StringBuilder();
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            buffer.append(line);
+	        }
+	        
+	        // Parse JSON using Gson (you already have this imported)
+	        Gson gson = new Gson();
+	        JsonObject jsonObject = gson.fromJson(buffer.toString(), JsonObject.class);
+	        
+	        // Get the rating parameter directly as string
+	        String rating = "default"; // Default value
+	        if (jsonObject.has("rating")) {
+	            rating = jsonObject.get("rating").getAsString();
+	        }
+			
 			// Get the photographer list from the request
 			// Assuming you have a method to fetch the photographer list
-			List<Photographer> photographerList = ShowPhotographers.getPhotographerList();
+			List<Photographer> photographerList = ShowPhotographers.getPhotographerList(rating);
 			
 			// Set the photographer list as an attribute in the request
 			response.setContentType("application/json");
 	        response.setCharacterEncoding("UTF-8");
 
 	        // Convert to JSON and write directly to response
-	        Gson gson = new Gson();
 	        String json = gson.toJson(photographerList);
 	        response.getWriter().write(json);
 	    } catch (Exception e) {

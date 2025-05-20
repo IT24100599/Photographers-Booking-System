@@ -32,6 +32,10 @@ public class ImageViewServlet extends HttpServlet {
         
         String fileName = request.getParameter("file");
         
+        String action = request.getParameter("action");
+        
+        String uploadDirectory;
+        
         if (fileName == null || fileName.isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "File name is required");
             return;
@@ -42,8 +46,20 @@ public class ImageViewServlet extends HttpServlet {
             return;
         }
         
-
-        String uploadDirectory = getUserUploadDirectory(request);
+        if("target".equals(action)) {
+			String targetName = request.getParameter("targetName");
+			if (targetName == null || targetName.trim().isEmpty()) {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Target name is required");
+				return;
+			}
+			
+			uploadDirectory = BASE_UPLOAD_DIRECTORY + targetName + "\\";
+			
+		} else {
+			uploadDirectory = getUserUploadDirectory(request);
+		}
+        
+        
         String filePath = uploadDirectory + fileName;
         
         File file = new File(filePath);

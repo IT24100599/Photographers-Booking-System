@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="com.userMgr.models.User" %>
+<%@ page import="com.photographerMgr.models.Photographer" %>
 
 <%@ page import="com.chat.model.Chat"%>
 <%@ page import="com.chat.dao.UserDAO"%>
@@ -13,7 +13,7 @@
 <%@ page import="java.util.HashMap"%>
 
 <% 
-User user = (User)session.getAttribute("user");
+Photographer user = (Photographer)session.getAttribute("photographer");
 
 Chat currentUser = (Chat) session.getAttribute("chat");
 
@@ -73,7 +73,7 @@ Map<Integer, Integer> unreadCounts = new HashMap<>();
                     
                     <div class="user-avatar">
                     	<% if (user != null) { %>                  		
-                    		<img src="displayProfilePicUSER?targetName=<%= user.getUsername() %>" alt="Profile Picture" id="profile-picture">
+                    		<img src="displayProfilePic?targetName=<%= user.getUsername() %>" alt="Profile Picture" id="profile-picture">
                         <% } else { %>
 		                    <img src="assets/defaults/unknown.gif" alt="Profile Picture" id="profile-picture">
                	        <% } %>
@@ -125,7 +125,7 @@ Map<Integer, Integer> unreadCounts = new HashMap<>();
                      %>
                     <div class="profileSum">
                         <div class="profile-picture-container glass-card">
-                            <img src="displayProfilePicUSER?targetName=<%= user.getUsername() %>" alt="Profile Picture" id="profile-picture-preview">   
+                            <img src="displayProfilePic?targetName=<%= user.getUsername() %>" alt="Profile Picture" id="profile-picture-preview">   
                         </div>
 
                         <div class="profData">
@@ -134,6 +134,7 @@ Map<Integer, Integer> unreadCounts = new HashMap<>();
                             <hr id="profbr">
                             <p>Email: <%= user.getEmail() %></p>
                             <p>Phone: <%= user.getPhone() %></p>
+                            <p>Ratings: <%= user.getRatings() %></p>
                             <hr id="profbr">
                             <button type="button"  onclick="window.location.href='customer.jsp'" class="btn-animated"><i class="fas fa-edit"></i> Edit Profile</button>
                         </div>

@@ -63,19 +63,11 @@
                         <input type="text" id="photographer-search" placeholder="Search by name, specialty or location...">
                     </div>
                     <div class="filter-options">
-                        <select id="specialty-filter" class="glass-input">
-                            <option value="">All Specialties</option>
-                            <option value="Wedding">Wedding</option>
-                            <option value="Portrait">Portrait</option>
-                            <option value="Event">Event</option>
-                            <option value="Fashion">Fashion</option>
-                            <option value="Commercial">Commercial</option>
-                        </select>
-                        <select id="rating-filter" class="glass-input">
-                            <option value="">All Ratings</option>
-                            <option value="5">5 Stars</option>
-                            <option value="4">4+ Stars</option>
-                            <option value="3">3+ Stars</option>
+                        <select id="filter-by" class="glass-input">
+                            <option value="default">Default</option>
+                            <option value="r_LH">Ratings: Low to High</option>
+                            <option value="r_HL">Ratings: Hight to Low</option>
+
                         </select>
                     </div>
                 </div>

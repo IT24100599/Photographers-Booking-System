@@ -1,2 +1,3 @@
 Krishmal Dinidu, krishmal24, 123456, krishmal@gmail.com, Male, 11@;% sri lanka, 0712351178
 Thisula Nimsara, thisula24, 123456, thisula@gmail.com, Male, 66@;% Sri Lanka, 0768998989
+Test User 1, testuser1, testu1, testuser1@mm.mm, Male, aaa@;% aa, 0123456781

@@ -12,21 +12,11 @@ import com.userMgr.models.User;
 public class UserDataProcessor {
     private static final String FILE_PATH = "C:\\Users\\savir\\Documents\\Java projects\\photoWeb\\src\\main\\webapp\\WEB-INF\\users.txt";
 
-    /**
-     * Authenticates a user using linear search on a list of users
-     * @param userIdentifier username or email
-     * @param password user's password
-     * @return User object if authenticated, null otherwise
-     */
     public User authenticateUser(String userIdentifier, String password) {
         List<User> users = loadUsersFromFile();
         return findUser(users, userIdentifier, password);
     }
 
-    /**
-     * Loads all users from users.txt into a list
-     * @return List of User objects
-     */
     private List<User> loadUsersFromFile() {
     	List<User> users = new ArrayList<>(); 
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -53,32 +43,21 @@ public class UserDataProcessor {
         return users;
     }
 
-    /**
-     * Linear search to find a user with matching credentials
-     * @param users list of users
-     * @param userIdentifier username or email
-     * @param password user's password
-     * @return User object if found and authenticated, null otherwise
-     */
     private User findUser(List<User> users, String userIdentifier, String password) {
         for (User user : users) {
             if (isMatchingUser(user, userIdentifier, password)) {
                 return user;
             }
         }
-        return null; // User not found or credentials don't match
+        return null;
     }
 
-    /**
-     * Checks if a user matches the provided credentials
-     * @param user User object
-     * @param userIdentifier username or email
-     * @param password user's password
-     * @return true if matching, false otherwise
-     */
+
     private boolean isMatchingUser(User user, String userIdentifier, String password) {
         return (user.getUsername().equals(userIdentifier) ||
                 user.getEmail().equals(userIdentifier)) &&
                user.getPassword().equals(password);
     }
+    
+    
 }

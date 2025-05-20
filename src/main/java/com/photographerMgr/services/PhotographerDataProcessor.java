@@ -26,6 +26,49 @@ public class PhotographerDataProcessor {
 
         return null;
     }
+    
+    public Photographer getPhotographerByUsername(String tagUser) {
+		List<Photographer> photographers = loadPhotographersFromFile();
+
+		
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+
+                if (parts.length >= 11) {
+                    String username = parts[0];
+                    String pwd = "null";
+                    String email = parts[2];
+                    String gender = parts[3];
+                    String address = parts[4];
+                    String phone = parts[5];
+                    String skills = parts[6];
+                    String fullName = parts[7];
+                    String experience = parts[8];
+                    String description = parts[9];
+                    Double ratings = Double.parseDouble(parts[10]);
+
+                    Photographer photographer = new Photographer(username, pwd, email, gender, address, phone, skills, fullName);
+                    photographer.setExperience(experience);
+                    photographer.setDescription(description);
+                    photographer.setRatings(ratings);
+                    photographers.add(photographer);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		for (Photographer photographer : photographers) {
+			if (photographer.getUsername().equals(tagUser)) {
+				return photographer;
+			}
+		}
+
+		return null;
+	}
 
     private List<Photographer> loadPhotographersFromFile() {
         List<Photographer> photographers = new ArrayList<>();
@@ -34,7 +77,7 @@ public class PhotographerDataProcessor {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
 
-                if (parts.length >= 10) {
+                if (parts.length >= 11) {
                     String username = parts[0];
                     String pwd = parts[1];
                     String email = parts[2];
@@ -45,10 +88,12 @@ public class PhotographerDataProcessor {
                     String fullName = parts[7];
                     String experience = parts[8];
                     String description = parts[9];
+                    Double ratings = Double.parseDouble(parts[10]);
 
                     Photographer photographer = new Photographer(username, pwd, email, gender, address, phone, skills, fullName);
                     photographer.setExperience(experience);
                     photographer.setDescription(description);
+                    photographer.setRatings(ratings);
                     photographers.add(photographer);
                 }
             }

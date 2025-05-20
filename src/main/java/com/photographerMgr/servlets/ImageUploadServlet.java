@@ -42,6 +42,10 @@ public class ImageUploadServlet extends HttpServlet {
         return getUserUploadDirectory(request) + DATA_FILE_NAME;
     }
     
+    private String getUserDataFilePathByName(String username) {
+		return BASE_UPLOAD_DIRECTORY + username + "\\" + DATA_FILE_NAME;
+	}
+    
     private void ensureDirectoryExists(String directoryPath) {
         File directory = new File(directoryPath);
         if (!directory.exists()) {
@@ -59,6 +63,42 @@ public class ImageUploadServlet extends HttpServlet {
 
         ensureDirectoryExists(BASE_UPLOAD_DIRECTORY);
     }
+    
+    
+    /*private List<ImageData> loadImageData(String username) {
+		List<ImageData> images = new ArrayList<>();
+		
+		String uploadDirectory = BASE_UPLOAD_DIRECTORY + username + "\\";
+		
+		File dataFile = new File(uploadDirectory);
+		if (!dataFile.exists()) {
+			return images;
+		}
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(uploadDirectory))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				String[] parts = line.split("\\|");
+				if (parts.length >= 3) {
+					ImageData image = new ImageData();
+					image.setTitle(parts[0]);
+					image.setFileName(parts[1]);
+					try {
+						image.setTimestamp(Long.parseLong(parts[2]));
+					} catch (NumberFormatException e) {
+						continue;
+					}
+					images.add(image);
+				}
+			}
+		} catch (IOException e) {
+			getServletContext().log("Error reading image metadata", e);
+		}
+		
+		Collections.sort(images, (a, b) -> Long.compare(b.getTimestamp(), a.getTimestamp()));
+		
+		return images;
+	}*/
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -85,7 +125,33 @@ public class ImageUploadServlet extends HttpServlet {
                 out.println("  }" + (i < images.size() - 1 ? "," : ""));
             }
             out.println("]");
-        } else {
+        
+        } else if("target".equals(action)) {
+			String targetName = request.getParameter("targetName");
+			
+			if (targetName == null || targetName.trim().isEmpty()) {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Target name is required");
+				return;
+			}
+			
+			String dataFilePath = getUserDataFilePathByName(targetName);
+			List<ImageData> images = readImageData(dataFilePath);
+			
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
+			
+			out.println("[");
+			for (int i = 0; i < images.size(); i++) {
+				ImageData image = images.get(i);
+				out.println("  {");
+				out.println("    \"title\": \"" + escapeJson(image.getTitle()) + "\",");
+				out.println("    \"fileName\": \"" + escapeJson(image.getFileName()) + "\",");
+				out.println("    \"timestamp\": " + image.getTimestamp());
+				out.println("  }" + (i < images.size() - 1 ? "," : ""));
+			}
+			out.println("]");
+        
+    	} else {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
         }
     }
