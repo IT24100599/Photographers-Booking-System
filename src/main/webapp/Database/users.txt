@@ -1,6 +1,0 @@
-U001,John Doe,Customer,true
-U002,Emily Smith,Customer,true
-P001,Michael Brown,Photographer,false
-P002,Sophia Johnson,Photographer,true
-A001,Admin,Admin,true
-
