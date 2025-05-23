@@ -1,0 +1,701 @@
+/* Photographer Details Styles */
+:root {
+    --primary-color: #ffffff; /* Changed from blue-gray to white */
+    --secondary-color: #f5f5f5; /* Changed to very light gray */
+    --accent-color: #ffffff; /* Changed from blue to white */
+    --text-color: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --card-hover: rgba(255, 255, 255, 0.15);
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+body {
+    color: var(--text-color);
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+    text-decoration: none;
+    margin-right: auto;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.back-btn i {
+    margin-right: 5px;
+}
+
+.back-btn:hover {
+    transform: translateX(-5px);
+    background: rgba(255, 255, 255, 0.2); /* Changed from accent-color to light white */
+}
+
+#ph_topbar {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.photographer-detail-content {
+    padding: 20px;
+    padding-top: 2px;
+    color: var(--text-color);
+}
+
+.photographer-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#ph_det {
+    display: flex;
+}
+
+.photographer-profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 3px solid #ffffff; /* Changed from primary-color to white */
+}
+
+.photographer-header-info {
+    margin-left: 25px;
+    
+}
+
+.photographer-header-info h4 {
+    font-size: 28px;
+    margin-bottom: 5px;
+    color: var(--text-color);
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.specialty {
+    color: #ffffff; /* Changed from blue to white */
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.photographer-header-info .rating {
+    font-size: 18px;
+}
+
+.photographer-detail-item {
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 3px solid rgba(255, 255, 255, 0.5); /* Changed from blue to semi-transparent white */
+}
+
+.photographer-detail-item h5 {
+    font-size: 18px;
+    color: #ffffff; /* Changed from blue to white */
+    margin-bottom: 8px;
+}
+
+.photographer-detail-item p {
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+#photographer-gallery h4 {
+    font-size: 22px;
+    margin: 30px 0 15px;
+    color: var(--text-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.sample-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.sample-image img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.sample-image img:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.message-btn, .book-now-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.message-btn {
+    background: rgba(255, 255, 255, 0.15); /* Changed from gradient to semi-transparent white */
+}
+
+.book-now-btn {
+    background: rgba(255, 255, 255, 0.25); /* Changed from blue to slightly more opaque white */
+}
+
+.message-btn i, .book-now-btn i {
+    margin-right: 8px;
+}
+
+.message-btn:hover, .book-now-btn:hover {
+    background: rgba(255, 255, 255, 0.4); /* Brighter white on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Reviews Section */
+.reviews-section {
+    margin: 30px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+
+.reviews-section h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+}
+
+.reviews-section h4:before, .reviews-section h4:after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reviews-section h4:before {
+    margin-right: 15px;
+}
+
+.reviews-section h4:after {
+    margin-left: 15px;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 3px solid rgba(255, 255, 255, 0.5); /* Changed from blue to semi-transparent white */
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+}
+
+.reviewer-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid #ffffff; /* Changed from blue to white */
+}
+
+.reviewer-name {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.review-date {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85em;
+    margin-top: 10px;
+    display: block;
+    font-style: italic;
+}
+
+.review-content {
+    margin: 15px 0;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.review-photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.review-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.review-photo:hover {
+    transform: scale(1.05);
+    border-color: #ffffff; /* Changed from blue to white */
+}
+
+/* Add pagination styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 10px;
+    gap: 5px;
+}
+
+.pagination-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 40px;
+}
+
+.pagination-btn:hover {
+    background: rgba(255, 255, 255, 0.3); /* Changed from primary-color to semi-transparent white */
+    color: #ffffff;
+}
+
+.pagination-btn.active {
+    background: rgba(255, 255, 255, 0.4); /* Changed from gradient to semi-transparent white */
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: #ffffff;
+}
+
+.pagination-btn.prev, .pagination-btn.next {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #ffffff;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.small-btn {
+    padding: 10px 10px;
+    font-size: 0.85rem;
+}
+
+.small-btn i {
+    margin-right: 5px;
+}
+
+/* Media query for mobile view */
+@media (max-width: 768px) {
+    .header-actions {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Add these styles to your photographerDetails.css file */
+
+/* Hidden samples and reviews initially */
+.hidden-sample{
+    display: none;
+}
+
+.hidden-review{
+    display: none;
+}
+
+/* Load more button container */
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.load-more-btn {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.load-more-btn i {
+    margin-right: 8px;
+}
+
+.load-more-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+/* Circular pagination buttons */
+.pagination-btn[data-page] {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-weight: bold;
+}
+
+.pagination-btn.prev, .pagination-btn.next {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination {
+    gap: 10px;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.modal.active {
+    opacity: 1;
+}
+
+.image-preview-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    animation: fadeIn 0.3s ease;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1200px;
+    height: 85vh;
+    max-height: 900px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+    color: #ffffff;
+}
+
+.nav-btn {
+    color: #ffffff;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Portfolio Preview Modal Styles */
+.portfolio-preview-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    animation: fadeIn 0.3s ease;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 20px;
+    color: #ffffff;
+    width: 800px;
+}
+
+.portfolio-preview-header {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.portfolio-preview-header h3 {
+    margin: 0;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+#portfolio-preview-image {
+    max-width: 100%;
+    max-height: 60vh;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.portfolio-preview-details {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.portfolio-preview-details p {
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+}
+
+.portfolio-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.portfolio-meta span {
+    display: flex;
+    align-items: center;
+}
+
+.portfolio-meta i {
+    margin-right: 5px;
+}
+
+/* Enhanced Modal Styles */
+.image-preview-content {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1200px;
+    height: 85vh;
+    max-height: 900px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preview-header h4 {
+    margin: 0;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+#preview-counter {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+.preview-image-container {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 0;
+    overflow: hidden;
+}
+
+#preview-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#preview-image.changing {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+.large-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+}
+
+.large-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    opacity: 1;
+}
+
+.large-nav-btn.prev-btn {
+    left: 20px;
+}
+
+.large-nav-btn.next-btn {
+    right: 20px;
+}
+
+.preview-footer {
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.preview-info {
+    margin-bottom: 15px;
+}
+
+#preview-description {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.thumbnail {
+    flex: 0 0 auto;
+    width: 80px;
+    height: 60px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.thumbnail:hover {
+    opacity: 0.9;
+}
+
+.thumbnail.active-thumbnail {
+    opacity: 1;
+    border-color: #ffffff;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .photographer-detail-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .photographer-header-info {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .sample-images-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .reviewer-info {
+        margin-bottom: 10px;
+    }
+}

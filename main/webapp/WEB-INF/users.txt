@@ -1,0 +1,3 @@
+Krishmal Dinidu, krishmal24, 123456, krishmal@gmail.com, Male, 11@;% sri lanka, 0712351178
+Test User 1, testuser1, testu1, testuser1@mm.mm, Male, aaa@;% aa, 0123456781
+Test User ph2, testuser2ph, 123456, testuser2ph@mm.mm, Male, aaa@;% aa2, 0123456222
